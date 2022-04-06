@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace UDOT.Models.ViewModels
+namespace Intex2022.Models.ViewModels
 {
     public class CrashesViewModel
     {

@@ -5,6 +5,22 @@
     <UserSecretsId>aspnet-Intex2022-BAF5628B-EBEB-4DFC-9513-94B920FAF3F6</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'UDOT' " />
+  <ItemGroup>
+    <None Remove="AWSSDK.SecretsManager" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Microsoft.ML.OnnxRuntime" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Pomelo.EntityFrameworkCore.MySql" />
+    <None Remove="Components\" />
+    <None Remove="Infrastructure\" />
+    <None Remove="Migrations\" />
+    <None Remove="Models\" />
+    <None Remove="Models\ViewModels\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\County\" />
+    <None Remove="Views\Account\" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
   </ItemGroup>
@@ -15,6 +31,32 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.22">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\County\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\demo\" />
+    <Folder Include="wwwroot\assets\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\" />
+    <Content Remove="wwwroot\assets\demo\" />
+    <Content Remove="wwwroot\assets\img\" />
+  </ItemGroup>
 </Project>

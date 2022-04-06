@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UDOT.Models
+namespace Intex2022.Models
 {
     public class AppIdentityDbContext : IdentityDbContext<IdentityUser>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.ML.OnnxRuntime.Tensors;
 
-namespace UDOT.Models
+namespace Intex2022.Models
 {
     public class crashData
     {

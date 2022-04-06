@@ -11,14 +11,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.ML.OnnxRuntime;
-using UDOT.Models;
-using Amazon;
-using Amazon.SecretsManager;
-using Amazon.SecretsManager.Model;
+using Intex2022.Models;
+//using Amazon;
+//using Amazon.SecretsManager;
+//using Amazon.SecretsManager.Model;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 
-namespace UDOT
+namespace Intex2022
 {
     public class Startup
     {
@@ -131,7 +131,7 @@ namespace UDOT
                 options.Password.RequiredUniqueChars = 1;
             });
 
-            
+
 
             services.AddDbContext<CrashDbContext>(options =>
             {
@@ -184,25 +184,13 @@ namespace UDOT
                 endpoints.MapControllerRoute(
                     "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
 
-                endpoints.MapControllerRoute("countypage",
-                "{countySelect}/Page{pageNum}",
-                new { Controller = "Home", action = "AllList" });
-
-                endpoints.MapControllerRoute(
-                    "Paging",
-                    "Page{pageNum}",
-                    new { Controller = "Home", action = "AllList", pageNum = 1 });
-
-                endpoints.MapControllerRoute(
-                    "County", "{countySelect}", new { Controller = "Home", action = "AllList" });
 
 
-                
                 //Need to do something with different endpoints or different something for different authorization levels
 
 
 
-                
+
 
                 endpoints.MapDefaultControllerRoute();
 

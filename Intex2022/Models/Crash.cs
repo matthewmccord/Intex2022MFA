@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace UDOT.Models
+namespace Intex2022.Models
 {
     public class Crash
     {

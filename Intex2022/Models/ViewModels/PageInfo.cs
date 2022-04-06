@@ -1,5 +1,5 @@
 ﻿using System;
-namespace UDOT.Models.ViewModels
+namespace Intex2022.Models.ViewModels
 {
     public class PageInfo
     {

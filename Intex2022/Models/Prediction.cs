@@ -1,5 +1,5 @@
 ﻿using System;
-namespace UDOT.Models
+namespace Intex2022.Models
 {
     public class Prediction
     {
