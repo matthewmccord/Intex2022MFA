@@ -1,0 +1,16 @@
+﻿@{
+}
+
+@model IEnumerable<string>
+
+
+    <div class="d-grid gap-2">
+        <a asp-controller="Home" asp-action="CrashDetailsList" asp-route-countySelect="" asp-route-pageNum="1" class="btn @(ViewBag.SelectedCounty is null ? "btn-primary" : "btn-outline-secondary")">All Counties</a>
+        <br />
+        @foreach (string c in Model)
+        {
+            <a asp-controller="Home" asp-action="CrashDetailsList" asp-route-countySelect="@c" asp-route-pageNum="1"
+               class="btn @(ViewBag.SelectedCounty == c ? "btn-primary" : "btn-outline-secondary")">@c</a>
+            <br />
+        }
+    </div>

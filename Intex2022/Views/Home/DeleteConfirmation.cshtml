@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Delete Crash";
+}
+
+@model Crash
+
+<h2>Confirm Deletion</h2>
+<h3>Are you sure you want to delete the crash with Crash ID: @Model.CRASH_ID ?</h3>
+<a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@Model.CRASH_ID">Delete</a>
+<input type="hidden" asp-for="CRASH_ID" />

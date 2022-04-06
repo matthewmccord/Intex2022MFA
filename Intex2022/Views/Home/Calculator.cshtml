@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Calculator";
+}
+<h1>@ViewData["Title"]</h1>
+@model UDOT.Models.crashData
+
+
+<form style="text-align:center" method="post" asp-controller="Home" asp-action="Calculator">
+    <div asp-validation-summary="All"></div>
+
+    <fieldset width="0px;">
+        <legend>Predict Crash Severity</legend>
+        <input asp-for="milepoint" type="number" value=0 required hidden /><br />
+
+        <label asp-for="dui">DUI:</label>
+        <select id="dui" name="dui" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+
+        </select>
+        <br />
+        <label asp-for="intersection_related">Intersection Related:</label>
+        <select id="intersection_related" name="intersection_related" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>        <br />
+        <label asp-for="wild_animal_related">Wild Animal Related:</label>
+        <select id="wild_animal_related" name="wild_animal_related" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="overturn_rollover">Overturn Rollover:</label>
+        <select id="overturn_rollover" name="overturn_rollover" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="teenage_driver_involved">Teenage Driver Involved:</label>
+        <select id="teenage_driver_involved" name="teenage_driver_involved" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="older_driver_involved">Older Driver Involved:</label>
+        <select id="older_driver_involved" name="older_driver_involved" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="single_vehicle">Single Vehicle:</label>
+        <select id="single_vehicle" name="single_vehicle" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="distracted_driving">Distracted Driving:</label>
+        <select id="distracted_driving" name="distracted_driving" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="roadway_departure">Roadway Departure:</label>
+        <select id="roadway_departure" name="roadway_departure" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="city_OUTSIDE_CITY_LIMITS">Outside City Limits:</label>
+        <select id="city_OUTSIDE_CITY_LIMITS" name="city_OUTSIDE_CITY_LIMITS" class="form-control" value="0">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="city_Other" hidden>City Other:</label>
+        <select id="city_Other" name="city_Other" class="form-control" value="0" hidden>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="city_SANDY" hidden>City Sandy:</label>
+        <select id="city_SANDY" name="city_SANDY" class="form-control" value="0" hidden>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <label asp-for="county_name_SALT_LAKE" hidden>SLC County:</label>
+        <select id="county_name_SALT_LAKE" name="county_name_SALT_LAKE" class="form-control" value="0" hidden>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br />
+        <input asp-for="crash_severity_id" type="number" name="crash_severity_id" value=0 required hidden /><br />
+
+    </fieldset>
+    <button type="submit">Predict Severity</button>
+</form>

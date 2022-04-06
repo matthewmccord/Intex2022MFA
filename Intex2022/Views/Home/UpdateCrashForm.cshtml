@@ -1,0 +1,275 @@
+﻿@model Crash
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+
+<h2>Update Vehicle Crash</h2>
+<h5>Update crash information below:</h5>
+<br />
+<form method="POST" action="/Home/UpdateCrash">
+
+    <input type="hidden" name="CRASH_ID" value="@Model.CRASH_ID" readonly />
+
+    <div class="mb-2">
+        <label for="Crash_Date-time" class="form-label">Select crash date:</label>
+        <br />
+        <input type="date" id="Expirydate" class="form-control" name="Crash_Date"
+               value="@(@Model == null ? null : @Model.Crash_Date.ToString("yyyy-MM-dd"))" />
+    </div>
+    <div class="mb-2">
+        <label for="Crash_Time" class="form-label">Select time of crash:</label>
+        <br />
+        <input type="time" id="Crash_Time" class="form-control"
+               name="Crash_Time" value="@Model.Crash_Time">
+    </div>
+
+    <div class="mb-2">
+        <label name="Route" class="form-label">Route No:</label>
+        <input type="number" class="form-control" name="Route" min="0" value="@Model.Route">
+    </div>
+    <div class="mb-2">
+        <label name="Milepoint" class="form-label">Milepoint:</label>
+        <input type="number" class="form-control" name="Milepoint" value="@Model.Milepoint">
+    </div>
+
+    @*include max length*@
+    <div class="mb-2">
+        <label name="Lat_Utm_Y" class="form-label">Latitude:</label>
+        <input type="number" class="form-control" name="Lat_Utm_Y" value="@Model.Lat_Utm_Y">
+    </div>
+
+    @*include max length*@
+    <div class="mb-2">
+        <label name="Long_Utm_X" class="form-label">Longitude:</label>
+        <input type="number" class="form-control" name="Long_Utm_X" value="@Model.Long_Utm_X">
+    </div>
+
+
+    <div class="mb-2">
+        <label name="Main_Road_Name" class="form-label">Main Road:</label>
+        <input type="text" class="form-control" name="Main_Road_Name" value="@Model.Main_Road_Name">
+    </div>
+
+    @*FINISH CITY DROPDOWN, get city and county to populate correctly*@
+    <div class="mb-2">
+        <label name="City" class="form-label">City:</label>
+        <select id="City" name="City" class="form-control" value="@Model.City">
+            <option value="Alpine">Alpine</option>
+            <option value="American Fork">American Fork</option>
+            <option value="Aurora">Aurora</option>
+            <option value="Bear River City">Bear River City</option>
+            <option value="Beaver">Beaver</option>
+            <option value="Blanding">Blanding</option>
+            <option value="Bluffdale">Bluffdale</option>
+            <option value="Bountiful">Bountiful</option>
+            <option value="Brigham City">Brigham City</option>
+            <option value="Castle Dale">Castle Dale</option>
+            <option value="Cedar City">Cedar City</option>
+            <option value="Cedar Hills">Cedar Hills</option>
+            <option value="Centerfield">Centerfield</option>
+            <option value="Centerville">Centerville</option>
+            <option value="Clearfield">Clearfield</option>
+            <option value="Clinton">Clinton</option>
+            <option value="Coalville">Coalville</option>
+            <option value="Cottonwood Heights">Cottonwood Heights</option>
+            <option value="Delta">Delta</option>
+            <option value="Draper">Draper</option>
+            <option value="Duchesne">Duchesne</option>
+            <option value="Eagle Mountain">Eagle Mountain</option>
+            <option value="East Carbon">East Carbon</option>
+            <option value="Elk Ridge">Elk Ridge</option>
+            <option value="Enoch">Enoch</option>
+            <option value="Enterprise">Enterprise</option>
+            <option value="Ephraim">Ephraim</option>
+            <option value="Escalante">Escalante</option>
+            <option value="Eureka">Eureka</option>
+            <option value="Fairview">Fairview</option>
+            <option value="Farmington">Farmington</option>
+            <option value="Farr West">Farr West</option>
+            <option value="Ferron">Ferron</option>
+            <option value="Fillmore">Fillmore</option>
+            <option value="Fountain Green">Fountain Green</option>
+            <option value="Fruit Heights">Fruit Heights</option>
+            <option value="Garland">Garland</option>
+            <option value="Grantsville">Grantsville</option>
+            <option value="Green River">Green River</option>
+            <option value="Gunnison">Gunnison</option>
+            <option value="Harrisville">Harrisville</option>
+            <option value="Heber City">Heber City</option>
+            <option value="Helper">Helper</option>
+            <option value="Herriman">Herriman</option>
+            <option value="Highland">Highland</option>
+            <option value="Hildale">Hildale</option>
+            <option value="Holladay">Holladay</option>
+            <option value="Honeyville">Honeyville</option>
+            <option value="Hooper">Hooper</option>
+            <option value="Huntington">Huntington</option>
+            <option value="Hurricane">Hurricane</option>
+            <option value="Hyde Park">Hyde Park</option>
+            <option value="Hyrum">Hyrum</option>
+            <option value="Ivins">Ivins</option>
+            <option value="Kamas">Kamas</option>
+            <option value="Kanab">Kanab</option>
+            <option value="Kaysville">Kaysville</option>
+            <option value="La Verkin">La Verkin</option>
+            <option value="Layton">Layton</option>
+            <option value="Lehi">Lehi</option>
+            <option value="Lewiston">Lewiston</option>
+            <option value="Lindon">Lindon</option>
+            <option value="Logan">Logan</option>
+            <option value="Manti">Manti</option>
+            <option value="Mapleton	">Mapleton	</option>
+            <option value="Marriott-Slaterville">Marriott-Slaterville</option>
+            <option value="Mendon">Mendon</option>
+            <option value="Midvale">Midvale</option>
+            <option value="Midway">Midway</option>
+            <option value="Milford">Milford</option>
+            <option value="Millcreek">Millcreek</option>
+            <option value="Millville">Millville</option>
+            <option value="Moab">Moab</option>
+            <option value="Toole">Toole</option>
+
+
+
+
+
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label name="County_Name" class="form-label">County:</label>
+        <select id="County_Name" name="County_Name" class="form-control">
+            <option value="Beaver">Beaver</option>
+            <option value="Box Elder">Box Elder</option>
+            <option value="Cache">Cache</option>
+            <option value="Carbon">Carbon</option>
+            <option value="Daggett">Daggett</option>
+            <option value="Davis">Davis</option>
+            <option value="Duchesne">Duchesne</option>
+            <option value="Emery">Emery</option>
+            <option value="Garfield">Garfield</option>
+            <option value="Grand">Grand</option>
+            <option value="Iron">Iron</option>
+            <option value="Juab">Juab</option>
+            <option value="Kane">Kane</option>
+            <option value="Millard">Millard</option>
+            <option value="Morgan">Morgan</option>
+            <option value="Piute">Piute</option>
+            <option value="Rich">Rich</option>
+            <option value="Salt Lake">Salt Lake</option>
+            <option value="San Juan">San Juan</option>
+            <option value="Sanpete">Sanpete</option>
+            <option value="Sevier">Sevier</option>
+            <option value="Summit">Summit</option>
+            <option value="Tooele">Tooele</option>
+            <option value="Uintah">Uintah</option>
+            <option value="Utah">Utah</option>
+            <option value="Wasatch">Wasatch</option>
+            <option value="Washington">Washington</option>
+            <option value="Wayne">Wayne</option>
+            <option value="Weber">Weber</option>
+        </select>
+    </div>
+
+    <br />
+
+    <div class="mb-2">
+        <label name="Crash_Severity_ID" class="form-label">Crash Severity (1=no injury, 2=possible injury, 3=suspected minor injury, 4=suspected serious injury, 5=fatal):</label>
+        <select id="Crash_Severity_ID" name="Crash_Severity_ID" class="form-control" value="@Model.Crash_Severity_ID">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+        </select>
+    </div>
+
+    <br /><hr /><br />
+
+    <h6>Check boxes that apply to crash.</h6>
+
+    <div class="mb-2">
+        <label name="Work_Zone_Related" class="form-label">Work Zone Related</label>
+        <input type="checkbox" id="Work_Zone_Related" name="Work_Zone_Related" value="True" checked="@Model.Work_Zone_Related">
+    </div>
+    <div class="mb-2">
+        <label name="Pedestrian_Involved" class="form-label">Pedestrian Involved</label>
+        <input type="checkbox" id="Pedestrian_Involved" name="Pedestrian_Involved" value="True" checked="@Model.Pedestrian_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Bicyclist_Involved" class="form-label">Bicyclist Involved</label>
+        <input type="checkbox" id="Bicyclist_Involved" name="Bicyclist_Involved" value="True" checked="@Model.Bicyclist_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Motorcycle_Involved" class="form-label">Motorcycle Involved</label>
+        <input type="checkbox" id="Motorcycle_Involved" name="Motorcycle_Involved" value="True" checked="@Model.Motorcycle_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Improper_Restraint" class="form-label">Improper Restraint</label>
+        <input type="checkbox" id="Improper_Restraint" name="Improper_Restraint" value="True" checked="@Model.Improper_Restraint">
+    </div>
+    <div class="mb-2">
+        <label name="Unrestrained" class="form-label">Unrestrained</label>
+        <input type="checkbox" id="Unrestrained" name="Unrestrained" value="True" checked="@Model.Unrestrained">
+    </div>
+    <div class="mb-2">
+        <label name="DUI" class="form-label">DUI</label>
+        <input type="checkbox" id="DUI" name="DUI" value="True" checked="@Model.DUI">
+    </div>
+    <div class="mb-2">
+        <label name="Intersection_Related" class="form-label">Intersection Related</label>
+        <input type="checkbox" id="Intersection_Related" name="Intersection_Related" value="True" checked="@Model.Intersection_Related">
+    </div>
+    <div class="mb-2">
+        <label name="Wild_Animal_Related" class="form-label">Wild Animal Related</label>
+        <input type="checkbox" id="Wild_Animal_Related" name="Wild_Animal_Related" value="True" checked="@Model.Wild_Animal_Related">
+    </div>
+    <div class="mb-2">
+        <label name="Domestic_Animal_Related" class="form-label">Domestic Animal Related</label>
+        <input type="checkbox" id="Domestic_Animal_Related" name="Domestic_Animal_Related" value="True" checked="@Model.Domestic_Animal_Related">
+    </div>
+    <div class="mb-2">
+        <label name="Overturn_Rollover" class="form-label">Overturn Rollover</label>
+        <input type="checkbox" id="Overturn_Rollover" name="Overturn_Rollover" value="True" checked="@Model.Overturn_Rollover">
+    </div>
+    <div class="mb-2">
+        <label name="Commercial_Motor_VEH_Involved" class="form-label">Commercial Motor Vehicle Involved</label>
+        <input type="checkbox" id="Commercial_Motor_VEH_Involved" name="Commercial_Motor_VEH_Involved" value="True" checked="@Model.Commercial_Motor_VEH_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Teenage_Driver_Involved" class="form-label">Teenage Driver Involved</label>
+        <input type="checkbox" id="Teenage_Driver_Involved" name="Teenage_Driver_Involved" value="True" checked="@Model.Teenage_Driver_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Older_Driver_Involved" class="form-label">Older Driver Involved</label>
+        <input type="checkbox" id="Older_Driver_Involved" name="Older_Driver_Involved" value="True" checked="@Model.Older_Driver_Involved">
+    </div>
+    <div class="mb-2">
+        <label name="Night_Dark_Condition" class="form-label">Night/Dark Condition</label>
+        <input type="checkbox" id="Night_Dark_Condition" name="Night_Dark_Condition" value="True" checked="@Model.Night_Dark_Condition">
+    </div>
+    <div class="mb-2">
+        <label name="Single_Vehicle" class="form-label">Single Vehicle</label>
+        <input type="checkbox" id="Single_Vehicle" name="Single_Vehicle" value="True" checked="@Model.Single_Vehicle">
+    </div>
+    <div class="mb-2">
+        <label name="Distracted_Driver" class="form-label">Distracted Driving</label>
+        <input type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="True" checked="@Model.Distracted_Driver">
+    </div>
+    <div class="mb-2">
+        <label name="Drowsy_Driver" class="form-label">Drowsy Driving</label>
+        <input type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="True" checked="@Model.Drowsy_Driver">
+    </div>
+    <div class="mb-2">
+        <label name="Roadway_Departure" class="form-label">Roadway Departure</label>
+        <input type="checkbox" id="Roadway_Departure" name="Roadway_Departure" value="True" checked="@Model.Roadway_Departure">
+    </div>
+
+    <div class="mb-2">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>
+
+

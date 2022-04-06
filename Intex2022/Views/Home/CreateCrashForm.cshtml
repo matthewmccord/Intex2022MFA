@@ -1,0 +1,197 @@
+﻿
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<h2>Add Vehicle Crash</h2>
+<h5>Fill out crash information below:</h5>
+<br />
+<form method="POST" action="/Home/CreateCrash">
+
+    <input type="hidden" name="CRASH_ID" />
+
+    <div class="mb-2">
+        <label for="meeting-time" class="form-label">Select crash date:</label>
+        <input type="date" id="Crash_Date" class="form-control"
+               name="Crash_Date">
+    </div>
+    <div class="mb-2">
+        <label for="meeting-time" class="form-label">Select time of crash:</label>
+        <input type="time" id="Crash_Time" class="form-control"
+               name="Crash_Time">
+    </div>
+
+
+    <div class="mb-2">
+        <label name="Route" class="form-label">Route No:</label>
+        <input type="number" class="form-control" name="Route" min="0">
+    </div>
+    <div class="mb-2">
+        <label name="Milepoint" class="form-label">Milepoint:</label>
+        <input type="number" class="form-control" name="Milepoint">
+    </div>
+    <div class="mb-2">
+        <label name="Lat_Utm_Y" class="form-label">Latitude:</label>
+        <input type="number" class="form-control" name="Lat_Utm_Y">
+    </div>
+    <div class="mb-2">
+        <label name="Long_Utm_X" class="form-label">Longitude:</label>
+        <input type="number" class="form-control" name="Long_Utm_X">
+    </div>
+
+
+    <div class="mb-2">
+        <label name="Main_Road_Name" class="form-label">Main Road:</label>
+        <input type="text" class="form-control" name="Main_Road_Name">
+    </div>
+
+    <div class="mb-2">
+        <label name="City" class="form-label">City:</label>
+        <select id="City" name="City" class="form-control">
+            @foreach (string c in ViewBag.Crashes)
+            {
+                <option value="@c">@c</option>
+            }
+
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label name="County_Name" class="form-label">County:</label>
+        <select id="County_Name" name="County_Name" class="form-control">
+            <option value="Beaver">Beaver</option>
+            <option value="Box Elder">Box Elder</option>
+            <option value="Cache">Cache</option>
+            <option value="Carbon">Carbon</option>
+            <option value="Daggett">Daggett</option>
+            <option value="Davis">Davis</option>
+            <option value="Duchesne">Duchesne</option>
+            <option value="Emery">Emery</option>
+            <option value="Garfield">Garfield</option>
+            <option value="Grand">Grand</option>
+            <option value="Iron">Iron</option>
+            <option value="Juab">Juab</option>
+            <option value="Kane">Kane</option>
+            <option value="Millard">Millard</option>
+            <option value="Morgan">Morgan</option>
+            <option value="Piute">Piute</option>
+            <option value="Rich">Rich</option>
+            <option value="Salt Lake">Salt Lake</option>
+            <option value="San Juan">San Juan</option>
+            <option value="Sanpete">Sanpete</option>
+            <option value="Sevier">Sevier</option>
+            <option value="Summit">Summit</option>
+            <option value="Tooele">Tooele</option>
+            <option value="Uintah">Uintah</option>
+            <option value="Utah">Utah</option>
+            <option value="Wasatch">Wasatch</option>
+            <option value="Washington">Washington</option>
+            <option value="Wayne">Wayne</option>
+            <option value="Weber">Weber</option>
+        </select>
+    </div>
+
+    <br />
+
+    <div class="mb-2">
+        <label name="Crash_Severity_ID" class="form-label">Crash Severity (1=no injury, 2=possible injury, 3=suspected minor injury, 4=suspected serious injury, 5=fatal):</label>
+        <select id="Crash_Severity_ID" name="Crash_Severity_ID" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+        </select>
+    </div>
+
+    <br /><hr /><br />
+
+    <h6>Check all boxes that apply to crash conditions.</h6>
+
+    <div class="mb-2">
+        <label name="Work_Zone_Related" class="form-label">Work Zone Related</label>
+        <input type="checkbox" id="Work_Zone_Related" name="Work_Zone_Related" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Pedestrian_Involved" class="form-label">Pedestrian Involved</label>
+        <input type="checkbox" id="Pedestrian_Involved" name="Pedestrian_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Bicyclist_Involved" class="form-label">Bicyclist Involved</label>
+        <input type="checkbox" id="Bicyclist_Involved" name="Bicyclist_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Motorcycle_Involved" class="form-label">Motorcycle Involved</label>
+        <input type="checkbox" id="Motorcycle_Involved" name="Motorcycle_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Improper_Restraint" class="form-label">Improper Restraint</label>
+        <input type="checkbox" id="Improper_Restraint" name="Improper_Restraint" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Unrestrained" class="form-label">Unrestrained</label>
+        <input type="checkbox" id="Unrestrained" name="Unrestrained" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="DUI" class="form-label">DUI</label>
+        <input type="checkbox" id="DUI" name="DUI" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Intersection_Related" class="form-label">Intersection Related</label>
+        <input type="checkbox" id="Intersection_Related" name="Intersection_Related" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Wild_Animal_Related" class="form-label">Wild Animal Related</label>
+        <input type="checkbox" id="Wild_Animal_Related" name="Wild_Animal_Related" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Domestic_Animal_Related" class="form-label">Domestic Animal Related</label>
+        <input type="checkbox" id="Domestic_Animal_Related" name="Domestic_Animal_Related" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Overturn_Rollover" class="form-label">Overturn Rollover</label>
+        <input type="checkbox" id="Overturn_Rollover" name="Overturn_Rollover" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Commercial_Motor_VEH_Involved" class="form-label">Commercial Motor Vehicle Involved</label>
+        <input type="checkbox" id="Commercial_Motor_VEH_Involved" name="Commercial_Motor_VEH_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Teenage_Driver_Involved" class="form-label">Teenage Driver Involved</label>
+        <input type="checkbox" id="Teenage_Driver_Involved" name="Teenage_Driver_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Older_Driver_Involved" class="form-label">Older Driver Involved</label>
+        <input type="checkbox" id="Older_Driver_Involved" name="Older_Driver_Involved" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Night_Dark_Condition" class="form-label">Night/Dark Condition</label>
+        <input type="checkbox" id="Night_Dark_Condition" name="Night_Dark_Condition" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Single_Vehicle" class="form-label">Single Vehicle</label>
+        <input type="checkbox" id="Single_Vehicle" name="Single_Vehicle" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Distracted_Driver" class="form-label">Distracted Driving</label>
+        <input type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Drowsy_Driver" class="form-label">Drowsy Driving</label>
+        <input type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="True">
+    </div>
+    <div class="mb-2">
+        <label name="Roadway_Departure" class="form-label">Roadway Departure</label>
+        <input type="checkbox" id="Roadway_Departure" name="Roadway_Departure" value="True">
+    </div>
+
+    <div class="mb-2">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        document.getElementById('Crash_Date').value = new Date().toDateInputValue();
+    </script>
+}

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<partial name="_CookieConsentPartial" />
+
+<div class="text-center">
+    <h1 class="display-4">Utah Crash Information and Prevention</h1>
+    <p>This is an important resource to help make informed decisions about how we can reduce traffic.</p>
+
+</div>
+
