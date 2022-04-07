@@ -1,9 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Calculator";
+﻿@*Learn More Page
+    - Basic information about the motor vehicle accidents in utah
+    - A calculator to predict severity of hypothetical crashes*@
+@{
+    ViewData["Title"] = "Learn More";
 }
 <h1>@ViewData["Title"]</h1>
 @model Intex2022.Models.crashData
+<img src="/assets/img/image1.jpeg"/>
+    <p>Utah has a unique set of challenges when it comes to motor vehicle accidents. For example, although alcohol is still a problem,
+    it may be less of a problem in Utah than distracted driving. Lawmakers need to understand these unique challenges better in order
+    to regulate effectively. Some of the main factors that impact crash severity are DUI, Wild Animals, Teenage drivers, Old Drivers,
+    City limits, and Distracted Driving. It is important to understand what factors contribute the most to crash severity in order to
+    help keep the roads of Utah a safe place.</p>
 
+<img src="/assets/img/image2.png" />
+
+@*Form to predict the severity of hypothetical crashes*@
 
 <form style="text-align:center" method="post" asp-controller="Home" asp-action="Calculator">
     <div asp-validation-summary="All"></div>
