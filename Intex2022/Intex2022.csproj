@@ -20,6 +20,9 @@
     <None Remove="Views\Shared\Components\" />
     <None Remove="Views\Shared\Components\County\" />
     <None Remove="Views\Account\" />
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Areas\Identity\Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -39,6 +42,8 @@
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +58,7 @@
     <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\assets\demo\" />
     <Folder Include="wwwroot\assets\img\" />
+    <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\assets\" />
