@@ -72,8 +72,8 @@ namespace Intex2022
                 options.UseMySql("server=database-2.cxahvrtm0kjp.us-east-1.rds.amazonaws.com;port=3306;database=udotidentity;user=admin;password=Adam1234!");
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 

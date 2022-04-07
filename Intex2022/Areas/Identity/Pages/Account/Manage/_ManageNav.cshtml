@@ -1,4 +1,4 @@
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<Intex2022User> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

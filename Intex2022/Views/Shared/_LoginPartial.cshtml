@@ -1,7 +1,8 @@
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
+@using Intex2022.Areas.Identity.Data
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<Intex2022User> SignInManager
+@inject UserManager<Intex2022User> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
