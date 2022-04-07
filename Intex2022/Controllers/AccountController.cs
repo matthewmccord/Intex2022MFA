@@ -60,14 +60,28 @@ namespace Intex2022.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Registration(RegistrationModel registrationModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        IdentityUser 
-        //    }
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Registration(RegistrationModel registrationModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = registrationModel.Username, Email = registrationModel.Email, PhoneNumber = registrationModel.phoneNumber };
+                var result = await userManager.CreateAsync(user, registrationModel.Password);
+
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                  
+            }
+            return View(registrationModel);
+        }
 
 
     }

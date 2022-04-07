@@ -1,13 +1,17 @@
-﻿@{
+﻿@{ 
+    ViewData["Title"] = "List of Crashes"; }
 }
+
+@model Intex2022.Models.ViewModels.RegistrationModel
+
 <h1>Registration Page</h1>
 
 <body>
     <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-1-2">McCord Books</span>
+        <span class="navbar-brand m-1-2">Create a User</span>
     </div>
 
-    @*<div class="m-1 p-1">
+    <div class="m-1 p-1">
         <div class="text-danger" asp-validation-summary="All"></div>
 
         <form method="post" asp-controller="Account" asp-action="Registration">
@@ -21,6 +25,21 @@
                 <input asp-for="Password" class="form-control" type="password" />
             </div>
 
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">Password:</label>
+                <input asp-for="ConfirmPassword" class="form-control" type="password" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">Email:</label>
+                <input asp-for="Email" class="form-control" type="email" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="phoneNumber">Phone Number:</label>
+                <input asp-for="phoneNumber" class="form-control" />
+            </div>
+            <br />
 
             <button class="btn btn-primary" type="submit">Create User</button>
 
@@ -28,5 +47,5 @@
 
             <input type="hidden" asp-for="ReturnUrl" />
         </form>
-        </div>*@
-    </body>
+    </div>
+</body>
