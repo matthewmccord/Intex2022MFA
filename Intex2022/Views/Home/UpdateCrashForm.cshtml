@@ -55,120 +55,42 @@
     <div class="mb-2">
         <label name="City" class="form-label">City:</label>
         <select id="City" name="City" class="form-control" value="@Model.City">
-            <option value="Alpine">Alpine</option>
-            <option value="American Fork">American Fork</option>
-            <option value="Aurora">Aurora</option>
-            <option value="Bear River City">Bear River City</option>
-            <option value="Beaver">Beaver</option>
-            <option value="Blanding">Blanding</option>
-            <option value="Bluffdale">Bluffdale</option>
-            <option value="Bountiful">Bountiful</option>
-            <option value="Brigham City">Brigham City</option>
-            <option value="Castle Dale">Castle Dale</option>
-            <option value="Cedar City">Cedar City</option>
-            <option value="Cedar Hills">Cedar Hills</option>
-            <option value="Centerfield">Centerfield</option>
-            <option value="Centerville">Centerville</option>
-            <option value="Clearfield">Clearfield</option>
-            <option value="Clinton">Clinton</option>
-            <option value="Coalville">Coalville</option>
-            <option value="Cottonwood Heights">Cottonwood Heights</option>
-            <option value="Delta">Delta</option>
-            <option value="Draper">Draper</option>
-            <option value="Duchesne">Duchesne</option>
-            <option value="Eagle Mountain">Eagle Mountain</option>
-            <option value="East Carbon">East Carbon</option>
-            <option value="Elk Ridge">Elk Ridge</option>
-            <option value="Enoch">Enoch</option>
-            <option value="Enterprise">Enterprise</option>
-            <option value="Ephraim">Ephraim</option>
-            <option value="Escalante">Escalante</option>
-            <option value="Eureka">Eureka</option>
-            <option value="Fairview">Fairview</option>
-            <option value="Farmington">Farmington</option>
-            <option value="Farr West">Farr West</option>
-            <option value="Ferron">Ferron</option>
-            <option value="Fillmore">Fillmore</option>
-            <option value="Fountain Green">Fountain Green</option>
-            <option value="Fruit Heights">Fruit Heights</option>
-            <option value="Garland">Garland</option>
-            <option value="Grantsville">Grantsville</option>
-            <option value="Green River">Green River</option>
-            <option value="Gunnison">Gunnison</option>
-            <option value="Harrisville">Harrisville</option>
-            <option value="Heber City">Heber City</option>
-            <option value="Helper">Helper</option>
-            <option value="Herriman">Herriman</option>
-            <option value="Highland">Highland</option>
-            <option value="Hildale">Hildale</option>
-            <option value="Holladay">Holladay</option>
-            <option value="Honeyville">Honeyville</option>
-            <option value="Hooper">Hooper</option>
-            <option value="Huntington">Huntington</option>
-            <option value="Hurricane">Hurricane</option>
-            <option value="Hyde Park">Hyde Park</option>
-            <option value="Hyrum">Hyrum</option>
-            <option value="Ivins">Ivins</option>
-            <option value="Kamas">Kamas</option>
-            <option value="Kanab">Kanab</option>
-            <option value="Kaysville">Kaysville</option>
-            <option value="La Verkin">La Verkin</option>
-            <option value="Layton">Layton</option>
-            <option value="Lehi">Lehi</option>
-            <option value="Lewiston">Lewiston</option>
-            <option value="Lindon">Lindon</option>
-            <option value="Logan">Logan</option>
-            <option value="Manti">Manti</option>
-            <option value="Mapleton	">Mapleton	</option>
-            <option value="Marriott-Slaterville">Marriott-Slaterville</option>
-            <option value="Mendon">Mendon</option>
-            <option value="Midvale">Midvale</option>
-            <option value="Midway">Midway</option>
-            <option value="Milford">Milford</option>
-            <option value="Millcreek">Millcreek</option>
-            <option value="Millville">Millville</option>
-            <option value="Moab">Moab</option>
-            <option value="Toole">Toole</option>
-
-
-
-
-
+            <option value="@Model.City">@Model.City</option>
         </select>
     </div>
 
     <div class="mb-2">
         <label name="County_Name" class="form-label">County:</label>
-        <select id="County_Name" name="County_Name" class="form-control">
-            <option value="Beaver">Beaver</option>
-            <option value="Box Elder">Box Elder</option>
-            <option value="Cache">Cache</option>
-            <option value="Carbon">Carbon</option>
-            <option value="Daggett">Daggett</option>
-            <option value="Davis">Davis</option>
-            <option value="Duchesne">Duchesne</option>
-            <option value="Emery">Emery</option>
-            <option value="Garfield">Garfield</option>
-            <option value="Grand">Grand</option>
-            <option value="Iron">Iron</option>
-            <option value="Juab">Juab</option>
-            <option value="Kane">Kane</option>
-            <option value="Millard">Millard</option>
-            <option value="Morgan">Morgan</option>
-            <option value="Piute">Piute</option>
-            <option value="Rich">Rich</option>
-            <option value="Salt Lake">Salt Lake</option>
-            <option value="San Juan">San Juan</option>
-            <option value="Sanpete">Sanpete</option>
-            <option value="Sevier">Sevier</option>
-            <option value="Summit">Summit</option>
-            <option value="Tooele">Tooele</option>
-            <option value="Uintah">Uintah</option>
-            <option value="Utah">Utah</option>
-            <option value="Wasatch">Wasatch</option>
-            <option value="Washington">Washington</option>
-            <option value="Wayne">Wayne</option>
-            <option value="Weber">Weber</option>
+        <select id="County_Name" name="County_Name" class="form-control" value="@Model.County_Name">
+            <option value="BEAVER">BEAVER</option>
+            <option value="BOX ELDER">BOX ELDER</option>
+            <option value="CACHE">CACHE</option>
+            <option value="CARBON">CARBON</option>
+            <option value="DAGGETT">DAGGETT</option>
+            <option value="DAVIS">DAVIS</option>
+            <option value="DUCHESNE">DUCHESNE</option>
+            <option value="EMERY">EMERY</option>
+            <option value="GARFIELD">GARFIELD</option>
+            <option value="GRAND">GRAND</option>
+            <option value="IRON">IRON</option>
+            <option value="JUAB">JUAB</option>
+            <option value="KANE">KANE</option>
+            <option value="MILLARD">MILLARD</option>
+            <option value="MORGAN">MORGAN</option>
+            <option value="PIUTE">PIUTE</option>
+            <option value="RICH">RICH</option>
+            <option value="SALT LAKE">SALT LAKE</option>
+            <option value="SAN JUAN">SAN JUAN</option>
+            <option value="SANPETE">SANPETE</option>
+            <option value="SEVIER">SEVIER</option>
+            <option value="SUMMIT">SUMMIT</option>
+            <option value="TOOELE">TOOELE</option>
+            <option value="UINTAH">UINTAH</option>
+            <option value="UTAH">UTAH</option>
+            <option value="WASATCH">WASATCH</option>
+            <option value="WASHINGTON">WASHINGTON</option>
+            <option value="WAYNE">WAYNE</option>
+            <option value="WEBER">WEBER</option>
         </select>
     </div>
 
@@ -273,3 +195,13 @@
 </form>
 
 
+@section Scripts{
+    <script defer>
+        function doSometing() {
+            document.getElementById('gender').value = "{{record.gender}}"
+            document.getElementById("state").value = "{{record.state}}"
+        }
+        doSometing();
+
+    </script>
+}

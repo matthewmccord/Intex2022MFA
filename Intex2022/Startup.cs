@@ -122,12 +122,12 @@ namespace Intex2022
 
             services.Configure<IdentityOptions>(options =>
             {
-                // Increased the Required Password Length to 10
+                // Increased the Required Password Length to 12 so that there is more security in length
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 10;
+                options.Password.RequiredLength = 12;
                 options.Password.RequiredUniqueChars = 1;
             });
 

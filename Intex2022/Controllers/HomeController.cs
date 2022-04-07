@@ -13,7 +13,7 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using Intex2022.Models;
 using Intex2022.Models.ViewModels;
 
-namespace UDOT.Controllers
+namespace Intex2022.Controllers
 {
     public class HomeController : Controller
     {
@@ -36,32 +36,8 @@ namespace UDOT.Controllers
 
 
         //------------------ PUBLIC READ LIST ------------------//
-        //public IActionResult AllList(string countySelect1)
-
-        //{
-        //    var x = new CrashesViewModel
-        //    {
-        //        Crashes = _context.Crashes
-        //        .Where(p => p.County_Name == countySelect || countySelect == null)
-        //        .OrderBy(p => p.County_Name),
-        //        //.Skip((pageNum - 1) * pageSize)
-        //        //.Take(pageSize),
-
-        //        PageInfo = new PageInfo
-        //        {
-        //            TotalNumCrashes =
-        //            (countySelect == null ? _context.Crashes.Count()
-        //            : _context.Crashes.Where(p => p.County_Name == countySelect).Count()),
-        //            //TotalNumCrashes = _context.Crashes.Count(),
-        //            //CrashesPerPage = pageSize,
-        //            //CurrentPage = pageNum
-        //        }
-        //    };
-
-        //    return View(x);
-        //}
-
-        public IActionResult AllList()
+        public IActionResult AllList(string countySelect, int pageNum = 1)
+        //public IActionResult CrashDetailsList(DateTime crashDate, int pageNum = 1)
 
         {
             var x = new CrashesViewModel
@@ -75,7 +51,6 @@ namespace UDOT.Controllers
 
             return View(x);
         }
-
 
 
 
@@ -96,7 +71,6 @@ namespace UDOT.Controllers
                 .OrderBy(p => p.County_Name),
                 //.Skip((pageNum - 1) * pageSize)
                 //.Take(pageSize),
-
 
                 PageInfo = new PageInfo
                 {
@@ -144,7 +118,11 @@ namespace UDOT.Controllers
         [Route("/Home/UpdateCrashForm/{id}")]
         public IActionResult UpdateCrashForm(int id)
         {
-            ViewBag.Crashes = _context.Crashes.ToList();
+            ViewBag.Crashes = _context.Crashes
+                .Select(c => c.City)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
             Crash c = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
             return View(c);
         }
@@ -157,6 +135,9 @@ namespace UDOT.Controllers
             _context.SaveChanges();
             return RedirectToAction("CrashDetailsList");
         }
+
+        IQueryable<Crash> Crashes => _context.Crashes;
+
 
         //---------------- Delete -----------------//
         [Authorize]
