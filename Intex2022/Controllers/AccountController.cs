@@ -20,13 +20,13 @@ namespace Intex2022.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
-            return View(new LoginModel());
+            return View(new LoginModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -38,7 +38,16 @@ namespace Intex2022.Controllers
 
                     if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
-                        return Redirect("/Home/CrashDetailsList");
+                        return Redirect(loginModel?.ReturnUrl ?? "/Home/CrashDetailsList");
+                        
+                        ///*if (!string.IsNullOrEmpty(returnUrl))*/
+                        //{
+                        //    return Redirect(returnUrl);
+                        //}
+                        //else
+                        //{
+                        //    return RedirectToAction("CrashDetailsList", "Home");
+                        //}
                     }
                 }
             }
@@ -55,9 +64,9 @@ namespace Intex2022.Controllers
         }
 
         [HttpGet]
-        public IActionResult Registration()
+        public IActionResult Registration(string returnUrl)
         {
-            return View();
+            return View(new RegistrationModel { ReturnUrl = returnUrl});
         }
 
         [HttpPost]
@@ -71,10 +80,19 @@ namespace Intex2022.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(registrationModel?.ReturnUrl ?? "/Home/CrashDetailsList");
+
+                    //if (!string.IsNullOrEmpty(returnUrl))
+                    //{
+                    //    return Redirect(returnUrl);
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToAction("CrashDetailsList", "Home");
+                    //}
                 }
 
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
