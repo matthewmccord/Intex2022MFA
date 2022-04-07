@@ -31,6 +31,14 @@ namespace Intex2022
         {
             services.AddControllersWithViews();
 
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                options.ExcludedHosts.Add("byugroup37.com");
+            });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential 
@@ -54,12 +62,14 @@ namespace Intex2022
 
             services.AddDbContext<CrashDbContext>(options =>
             {
-                options.UseMySql(Environment.GetEnvironmentVariable("CrashConnect"));
+                //Need to update this to Environment.GetEnvironmentVariable("CrashConnect")
+                options.UseMySql("server=database-2.cxahvrtm0kjp.us-east-1.rds.amazonaws.com;port=3306;database=udot;user=admin;password=Adam1234!");
             });
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             {
-                options.UseMySql(Environment.GetEnvironmentVariable("IdentityConnect"));
+                //Need to update this to Environment.GetEnvironmentVariable("IdentityConnect")
+                options.UseMySql("server=database-2.cxahvrtm0kjp.us-east-1.rds.amazonaws.com;port=3306;database=udotidentity;user=admin;password=Adam1234!");
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -79,7 +89,11 @@ namespace Intex2022
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
 
             app.UseHttpsRedirection();
