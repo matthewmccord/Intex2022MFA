@@ -101,6 +101,7 @@ namespace Intex2022.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
@@ -127,6 +128,7 @@ namespace Intex2022.Controllers
             return View(c);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
