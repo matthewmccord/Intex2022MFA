@@ -133,15 +133,24 @@ namespace Intex2022
 
 
 
+            //services.AddDbContext<CrashDbContext>(options =>
+            //{
+            //    options.UseMySql(Configuration["ConnectionStrings:CrashDbConnection"]);
+            //});
             services.AddDbContext<CrashDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:CrashDbConnection"]);
+                options.UseMySql(Environment.GetEnvironmentVariable("CrashConnect"));
             });
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]);
+                options.UseMySql(Environment.GetEnvironmentVariable("IdentityConnect"));
             });
+
+            //services.AddDbContext<AppIdentityDbContext>(options =>
+            //{
+            //    options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]);
+            //});
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
@@ -160,6 +169,8 @@ namespace Intex2022
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -193,12 +204,20 @@ namespace Intex2022
 
 
                 endpoints.MapDefaultControllerRoute();
+            });
 
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+            //extra endpoints need to delete if not using
+            //endpoints.MapControllerRoute(
+            //    name: "default",
+            //    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                //endpoints.MapControllerRoute("/admin/{*catchall}", "/Admin/Index");
+            //endpoints.MapControllerRoute("/admin/{*catchall}", "/Admin/Index");
+
+
+            //testing to check the environmental variables
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hosting Environment:" + env.EnvironmentName);
             });
 
             IdentitySeedData.EnsurePopulated(app);
