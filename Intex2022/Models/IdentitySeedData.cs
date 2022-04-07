@@ -1,63 +1,65 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿//commented out because the Seed Data for the Identity Database should already be in there and we can create users now.
 
-namespace Intex2022.Models
-{
-    public static class IdentitySeedData
-    {
-        private const string adminUser = "group37";
-        private const string adminPassword = "SecurePasswordFor37!";
+//using Microsoft.AspNetCore.Builder;
+//using Microsoft.AspNetCore.Identity;
+//using Microsoft.EntityFrameworkCore;
+//using Microsoft.Extensions.DependencyInjection;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
 
-        private const string adminUserMFA = "MFAgroup37";
-        private const string adminPasswordMFA = "MFASecurePasswordFor37!";
+//namespace Intex2022.Models
+//{
+//    public static class IdentitySeedData
+//    {
+//        private const string adminUser = "group37";
+//        private const string adminPassword = "SecurePasswordFor37!";
 
-        public static async void EnsurePopulated(IApplicationBuilder app)
-        {
-            AppIdentityDbContext _context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityDbContext>();
+//        private const string adminUserMFA = "MFAgroup37";
+//        private const string adminPasswordMFA = "MFASecurePasswordFor37!";
 
-            if (_context.Database.GetPendingMigrations().Any())
-            {
-                _context.Database.Migrate();
-            }
+//        public static async void EnsurePopulated(IApplicationBuilder app)
+//        {
+//            AppIdentityDbContext _context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityDbContext>();
 
-            UserManager<IdentityUser> userManager = app.ApplicationServices.CreateScope().ServiceProvider
-                .GetRequiredService<UserManager<IdentityUser>>();
+//            if (_context.Database.GetPendingMigrations().Any())
+//            {
+//                _context.Database.Migrate();
+//            }
 
-            IdentityUser user = await userManager.FindByIdAsync(adminUser);
+//            UserManager<IdentityUser> userManager = app.ApplicationServices.CreateScope().ServiceProvider
+//                .GetRequiredService<UserManager<IdentityUser>>();
 
-            IdentityUser user2 = await userManager.FindByIdAsync(adminUserMFA);
+//            IdentityUser user = await userManager.FindByIdAsync(adminUser);
 
-            if (user== null)
-            {
-                user = new IdentityUser(adminUser);
+//            IdentityUser user2 = await userManager.FindByIdAsync(adminUserMFA);
 
-                user.Email = "admin@yeet.com";
-                user.PhoneNumber = "555-1234";
+//            if (user== null)
+//            {
+//                user = new IdentityUser(adminUser);
 
-                await userManager.CreateAsync(user, adminPassword);
+//                user.Email = "admin@yeet.com";
+//                user.PhoneNumber = "555-1234";
+
+//                await userManager.CreateAsync(user, adminPassword);
 
                 
 
-            }
+//            }
 
-            if (user2 == null)
-            {
-                user2 = new IdentityUser(adminUserMFA);
-                user2.Email = "group37wells@gmail.com";
-                user2.PhoneNumber = "425-628-1716";
+//            if (user2 == null)
+//            {
+//                user2 = new IdentityUser(adminUserMFA);
+//                user2.Email = "group37wells@gmail.com";
+//                user2.PhoneNumber = "425-628-1716";
 
-                await userManager.CreateAsync(user2, adminPasswordMFA);
+//                await userManager.CreateAsync(user2, adminPasswordMFA);
 
 
 
-            }
+//            }
 
-        }
-    }
-}
+//        }
+//    }
+//}
