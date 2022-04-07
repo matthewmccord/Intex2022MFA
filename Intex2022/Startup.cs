@@ -149,7 +149,7 @@ namespace Intex2022
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 
             services.AddSingleton<InferenceSession>(
-                        new InferenceSession("Models/best_reg_model.onnx")
+                        new InferenceSession("wwwroot/best_reg_model.onnx")
                                                     );
         }
 

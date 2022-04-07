@@ -1,7 +1,7 @@
 
 {
     "region" : "us-east-1",
-    "configuration" : "Debug",
+    "configuration" : "Release",
     "framework"     : "netcoreapp3.1",
     "self-contained" : false,
     "application"    : "INTEX2022",
