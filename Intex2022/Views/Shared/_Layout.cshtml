@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +20,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom box-shadow mb-3" id="mainNav">
-        <partial name="_LoginPartial" />
+        @*<partial name="_LoginPartial" />*@
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="https://www.impactteendrivers.org/sites/default/files/media/pledge_safe_driving.png" style="height: 60px; ">
@@ -30,19 +33,38 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="Calculator">Learn More</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="CrashDetailsList">Crash Data</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="AllList">Data Available For All</a></li>
-                    @*<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/help/me/auth">2FA</a></li>*@
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="CrashDetailsList">Crash Data</a></li>
+                        if (User.IsInRole("Administrator") || User.IsInRole("test55"))
+                        {
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Home/CreateCrashForm">Add Crash</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="AllList">Crash Data for All</a></li>
+                    }
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labeledby="navbarDropdown">
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">User</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Admin</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/Account/Logout">Logout</a></li>
-                    </ul>
-                </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labeledby="navbarDropdown">
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li><a class="dropdown-item" href="/help/me/auth">2FA</a></li>
+                                <li><a class="dropdown-item" href="/Account/Logout">Logout @UserManager.GetUserName(User)</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">User Login</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Admin Login</a></li>
+                            }
+                            <li><hr class="dropdown-divider" /></li>
+
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -61,7 +83,7 @@
                 <div>
                     <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">GDPR Privacy Policy</a>
                     &middot;
-                    <a href="#">Terms &amp; Conditions</a>
+                    <a href="https://www.instagram.com/davidslau/">Terms &amp; Conditions</a>
                 </div>
             </div>
         </div>

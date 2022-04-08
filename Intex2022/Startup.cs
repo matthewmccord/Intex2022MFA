@@ -98,16 +98,16 @@ namespace Intex2022
             }
 
 
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add(
-                    "Content-Security-Policy",
-                    "script-src 'self'; " +
-                    "style-src 'self'; " +
-                    "img-src 'self'");
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add(
+            //        "Content-Security-Policy",
+            //        "script-src 'self'; " +
+            //        "style-src 'self'; " +
+            //        "img-src 'self'");
 
-                await next();
-            });
+            //    await next();
+            //});
             // Content Security Policy
             app.UseCsp(csp =>
             {

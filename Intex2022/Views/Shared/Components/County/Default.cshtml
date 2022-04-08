@@ -4,7 +4,7 @@
 @model IEnumerable<string>
 
 
-    <div class="d-grid gap-2">
+    <div class="d-grid">
         <a asp-controller="Home" asp-action="CrashDetailsList" asp-route-countySelect="" asp-route-pageNum="1" class="btn @(ViewBag.SelectedCounty is null ? "btn-primary" : "btn-outline-secondary")">All Counties</a>
         <br />
         @foreach (string c in Model)

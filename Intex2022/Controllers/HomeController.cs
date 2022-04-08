@@ -94,17 +94,19 @@ namespace Intex2022.Controllers
         [HttpGet]
         public IActionResult CreateCrashForm()
         {
-            if (!User.IsInRole("Administrator"))
+            if (!(User.IsInRole("Administrator") || User.IsInRole("test55")))
             {
+
                 return View("Error");
             }
             else
             {
+                
                 ViewBag.Crashes = _context.Crashes
-                    .Select(c => c.City)
-                    .Distinct()
-                    .OrderBy(c => c)
-                    .ToList();
+                   .Select(c => c.City)
+                   .Distinct()
+                   .OrderBy(c => c)
+                   .ToList();
 
                 return View();
             }
@@ -114,7 +116,7 @@ namespace Intex2022.Controllers
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
-            if (!User.IsInRole("Administrator"))
+            if (!(User.IsInRole("Administrator") || User.IsInRole("test55")))
             {
                 return View("Error");
             }
