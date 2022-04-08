@@ -7,11 +7,13 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@ViewData["Title"] - UDOT</title>
-    <link rel="icon" href="~/lib/flavicon.ico"/>
+    <link rel="icon" href="~/lib/flavicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <header>
@@ -31,6 +33,9 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="Calculator">Learn More</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="CrashDetailsList">Crash Data</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-area="" asp-controller="Home" asp-action="AllList">Data Available For All</a></li>
+                    @*<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/help/me/auth">2FA</a></li>*@
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -40,27 +45,6 @@
                             <li><a class="dropdown-item" href="/Account/Logout">Logout</a></li>
                         </ul>
                     </li>
-                    @*<li>
-                        <a class="nav-link text-dark" href="/help/me/auth">2FA</a>
-                    </li>*@
-                    @*
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CrashDetailsList">Crash List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateCrashForm">Add Crash</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllList">Data Available For All</a>
-                    </li>
-                    <li>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Calculator">Predictor</a>
-                    </li>
-                        *@
-
                 </ul>
 
             </div>
@@ -72,18 +56,12 @@
         @RenderBody()
     </div>
 
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - UDOT - <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">GDPR Compliant Privacy Policy</a>
-        </div>
-    </footer>*@
-
     <footer class="py-4 bg-light mt-auto">
         <div class="container-fluid px-4">
             <div class="d-flex align-items-center justify-content-between small">
                 <div class="text-muted">Copyright &copy; Your Website 2022</div>
                 <div>
-                    <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a>
+                    <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy">GDPR Privacy Policy</a>
                     &middot;
                     <a href="#">Terms &amp; Conditions</a>
                 </div>
