@@ -19,11 +19,13 @@ namespace Intex2022.Controllers
     {
         private CrashDbContext _context { get; set; }
         private InferenceSession _session;
+        private SignInManager<IdentityUser> signInManager;
 
-        public HomeController(CrashDbContext context, InferenceSession session)
+        public HomeController(CrashDbContext context, InferenceSession session, SignInManager<IdentityUser> sim)
         {
             _context = context;
             _session = session;
+            signInManager = sim;
         }
 
 
@@ -88,33 +90,49 @@ namespace Intex2022.Controllers
 
 
         //------------------ Add ------------------//
-        [Authorize]
+        [Authorize(Roles = "Administrator, test55")]
         [HttpGet]
         public IActionResult CreateCrashForm()
         {
-            ViewBag.Crashes = _context.Crashes
-                .Select(c => c.City)
-                .Distinct()
-                .OrderBy(c => c)
-                .ToList();
+            if (!User.IsInRole("Administrator"))
+            {
+                return View("Error");
+            }
+            else
+            {
+                ViewBag.Crashes = _context.Crashes
+                    .Select(c => c.City)
+                    .Distinct()
+                    .OrderBy(c => c)
+                    .ToList();
 
-            return View();
+                return View();
+            }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator, test55")]
         [HttpPost]
         public IActionResult CreateCrash([FromForm] Crash crash)
         {
-            int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
-            crash.CRASH_ID = newCrashID + 1;
-            crash.Crash_Date = crash.Crash_Date.Date;
-            _context.Add(crash);
-            _context.SaveChanges();
-            return RedirectToAction("CrashDetailsList");
+            if (!User.IsInRole("Administrator"))
+            {
+                return View("Error");
+            }
+            else
+            {
+
+
+                int newCrashID = _context.Crashes.OrderBy(x => x.CRASH_ID).Last().CRASH_ID;
+                crash.CRASH_ID = newCrashID + 1;
+                crash.Crash_Date = crash.Crash_Date.Date;
+                _context.Add(crash);
+                _context.SaveChanges();
+                return RedirectToAction("CrashDetailsList");
+            }
         }
 
         //------------------ Edit/Update ------------------//
-        [Authorize]
+        [Authorize(Roles = "Administrator, test55")]
         [HttpGet]
         [Route("/Home/UpdateCrashForm/{id}")]
         public IActionResult UpdateCrashForm(int id)
@@ -128,7 +146,7 @@ namespace Intex2022.Controllers
             return View(c);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator, test55")]
         [HttpPost]
         public IActionResult UpdateCrash([FromForm] Crash crash)
         {
@@ -149,7 +167,7 @@ namespace Intex2022.Controllers
             Crash crash = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
             return View("DeleteConfirmation", crash);
         }
-        [Authorize]
+        [Authorize(Roles= "Administrator, test55")]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(int id)
         {

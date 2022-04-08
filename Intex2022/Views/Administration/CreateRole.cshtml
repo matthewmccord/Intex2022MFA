@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Create New Role";
+}
+
+
+@model Intex2022.Models.ViewModels.CreateRoleViewModel
+
+<h1>Role Creation Page</h1>
+
+<body>
+    <div class="bg-dark text-white p-2">
+        <span class="navbar-brand m-1-2">Create a Role</span>
+    </div>
+
+    <div class="m-1 p-1">
+        <div class="text-danger" asp-validation-summary="All"></div>
+
+        <form method="post" asp-controller="Administration" asp-action="CreateRole">
+            <div class="form-group">
+                <label asp-for="RoleName">Role Name:</label>
+                <input asp-for="RoleName" class="form-control" />
+            </div>
+
+            <button class="btn btn-primary" type="submit">Create Role</button>
+        </form>
+    </div>
+</body>
