@@ -4,107 +4,161 @@
 @{
     ViewData["Title"] = "Learn More";
 }
-<h1>@ViewData["Title"]</h1>
 @model Intex2022.Models.crashData
-<img src="/assets/img/image1.jpeg"/>
-    <p>Utah has a unique set of challenges when it comes to motor vehicle accidents. For example, although alcohol is still a problem,
-    it may be less of a problem in Utah than distracted driving. Lawmakers need to understand these unique challenges better in order
-    to regulate effectively. Some of the main factors that impact crash severity are DUI, Wild Animals, Teenage drivers, Old Drivers,
-    City limits, and Distracted Driving. It is important to understand what factors contribute the most to crash severity in order to
-    help keep the roads of Utah a safe place.</p>
 
-<img src="/assets/img/image2.png" />
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    <p>
+        Utah has a unique set of challenges when it comes to motor vehicle accidents. For example, although alcohol is still a problem,
+        it may be less of a problem in Utah than distracted driving. Lawmakers need to understand these unique challenges better in order
+        to regulate effectively. Some of the main factors that impact crash severity are DUI, Wild Animals, Teenage drivers, Old Drivers,
+        City limits, and Distracted Driving. It is important to understand what factors contribute the most to crash severity in order to
+        help keep the roads of Utah a safe place.
+    </p>
+
+    <br /><br />
+    <hr />
+    <br /><br />
+
+    <img src="/assets/img/image1.jpeg" />
+
+
+    <br /><br />
+    <hr />
+    <br /><br />
+
+    <h3>Visualize Crash Statistics</h3>
+    <p>View the data behind Utah crashes. Interact with the graphs below to see more details.</p>
+    <iframe width="500" height="350" src="https://udps.numetric.net/fatalities-data#/0ab54033-4d74-49ea-a63c-686c8878081f" frameborder="0"></iframe>
+    <iframe width="500" height="350" src="https://udps.numetric.net/utah-crash-summary#/5404698e-ffb6-4c61-8769-be3a81cfd0e8" frameborder="0"></iframe>
+    <iframe width="500" height="350" src="https://udps.numetric.net/fatalities-data#/8f0ce534-767f-415b-85a4-7edb20dd35aa" frameborder="0"></iframe>
+    <iframe width="500" height="350" src="https://udps.numetric.net/fatalities-data#/9bb82985-f576-49ce-adf1-1da65db50a92" frameborder="0"></iframe>
+</div>
+
+<br /><br />
+<hr />
+<br /><br />
 
 @*Form to predict the severity of hypothetical crashes*@
+<div class="row m-1 p-1">
+    <div class="col-12">
+        <div class="container-fluid px-4">
+            <!-- Form title -->
+            <div class="text-center mb-5">
+                <div class="row justify-content-center" style="margin-top: -20px;">
+                    <div class="col-xl-8">
+                        <div asp-validation-summary="All"></div>
+                        <form style="text-align:center" method="post" asp-controller="Home" asp-action="Calculator">
+                            <h3>Predict Crash Severity</h3>
+                            <p>Predict the severity of a motor vehicle crash by selecting and submitting the various crash conditions below.</p>
+                            <input asp-for="milepoint" type="number" value=0 required hidden /><br />
 
-@*VARIABLES ARE MISSING*@
-<form style="text-align:center" method="post" asp-controller="Home" asp-action="Calculator">
-    <div asp-validation-summary="All"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <label asp-for="dui">DUI:</label>
+                                    <select id="dui" name="dui" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="intersection_related">Intersection Related:</label>
+                                    <select id="intersection_related" name="intersection_related" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="roadway_departure">Roadway Departure:</label>
+                                    <select id="roadway_departure" name="roadway_departure" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
 
-    <fieldset width="0px;">
-        <legend>Predict Crash Severity</legend>
-        <input asp-for="milepoint" type="number" value=0 required hidden /><br />
+                            <div class="row">
+                                <div class="col">
+                                    <label asp-for="wild_animal_related">Wild Animal Related:</label>
+                                    <select id="wild_animal_related" name="wild_animal_related" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="overturn_rollover">Overturn Rollover:</label>
+                                    <select id="overturn_rollover" name="overturn_rollover" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="city_OUTSIDE_CITY_LIMITS">Outside City Limits:</label>
+                                    <select id="city_OUTSIDE_CITY_LIMITS" name="city_OUTSIDE_CITY_LIMITS" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
 
-        <label asp-for="dui">DUI:</label>
-        <select id="dui" name="dui" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+                            <div class="row">
+                                <div class="col">
+                                    <label asp-for="teenage_driver_involved">Teenage Driver Involved:</label>
+                                    <select id="teenage_driver_involved" name="teenage_driver_involved" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="older_driver_involved">Older Driver Involved:</label>
+                                    <select id="older_driver_involved" name="older_driver_involved" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="single_vehicle">Single Vehicle:</label>
+                                    <select id="single_vehicle" name="single_vehicle" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                    <br />
+                                    <label asp-for="distracted_driving">Distracted Driving:</label>
+                                    <select id="distracted_driving" name="distracted_driving" class="form-control" value="0">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
 
-        </select>
-        <br />
-        <label asp-for="intersection_related">Intersection Related:</label>
-        <select id="intersection_related" name="intersection_related" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>        <br />
-        <label asp-for="wild_animal_related">Wild Animal Related:</label>
-        <select id="wild_animal_related" name="wild_animal_related" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="overturn_rollover">Overturn Rollover:</label>
-        <select id="overturn_rollover" name="overturn_rollover" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="teenage_driver_involved">Teenage Driver Involved:</label>
-        <select id="teenage_driver_involved" name="teenage_driver_involved" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="older_driver_involved">Older Driver Involved:</label>
-        <select id="older_driver_involved" name="older_driver_involved" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="single_vehicle">Single Vehicle:</label>
-        <select id="single_vehicle" name="single_vehicle" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="distracted_driving">Distracted Driving:</label>
-        <select id="distracted_driving" name="distracted_driving" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="roadway_departure">Roadway Departure:</label>
-        <select id="roadway_departure" name="roadway_departure" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="city_OUTSIDE_CITY_LIMITS">Outside City Limits:</label>
-        <select id="city_OUTSIDE_CITY_LIMITS" name="city_OUTSIDE_CITY_LIMITS" class="form-control" value="0">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="city_Other" hidden>City Other:</label>
-        <select id="city_Other" name="city_Other" class="form-control" value="0" hidden>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="city_SANDY" hidden>City Sandy:</label>
-        <select id="city_SANDY" name="city_SANDY" class="form-control" value="0" hidden>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <label asp-for="county_name_SALT_LAKE" hidden>SLC County:</label>
-        <select id="county_name_SALT_LAKE" name="county_name_SALT_LAKE" class="form-control" value="0" hidden>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        <br />
-        <input asp-for="crash_severity_id" type="number" name="crash_severity_id" value=0 required hidden /><br />
+                            <label asp-for="city_Other" hidden>City Other:</label>
+                            <select id="city_Other" name="city_Other" class="form-control" value="0" hidden>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                            <label asp-for="city_SANDY" hidden>City Sandy:</label>
+                            <select id="city_SANDY" name="city_SANDY" class="form-control" value="0" hidden>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                            <label asp-for="county_name_SALT_LAKE" hidden>SLC County:</label>
+                            <select id="county_name_SALT_LAKE" name="county_name_SALT_LAKE" class="form-control" value="0" hidden>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                           
+                            <br /><br />
+                            <button class="btn btn-primary" type="submit">Predict Severity</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    </fieldset>
-    <button type="submit">Predict Severity</button>
-</form>
+
+
+
+            
+
+           
+
+
+                        
