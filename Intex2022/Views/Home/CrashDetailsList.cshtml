@@ -11,37 +11,41 @@
 @*<a href="/Account/Logout" class="btn btn-success">Logout</a>*@
     </div>
 </div>
+﻿@{
+    ViewData["Title"] = "List of All";
+}
+
+@model CrashesViewModel
 
 <div class="row m-1 p-1">
-    <div id="county" class="col-2">
+    @*<div id="county" class="col-2">
         <vc:county></vc:county>
-    </div>
+    </div>*@
 
-
-    <main class="col-10">
-        <div class="row">
-            <div class="text-center col-9">
-                <h1 class="display-4">Utah Vehicle Crash Information</h1>
-            </div>
-            @*<div class="col-1">
-                <a href="/Account/Logout" class="btn btn-success">Logout</a>
-            </div>*@
-        </div>
-
+    <main class="col-12">
         <div class="container-fluid px-4">
-            <div>
-                <a href="/Home/CreateCrashForm" class="btn btn-success">+ Add Crash</a>
-            </div>
-
-            <br />
+            <h1 class="mt-4">Utah Crash Data</h1>
 
             <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    DataTable Example
+                <div class="card-body">
+                    The data set is from The Crash Studies Team at UDOT's Traffic & Safety Division who maintains a
+                    detailed database of all crashes on public roadways in Utah. This data is used to report
+                    safety trends, identify potential safety improvement projects, and allocate limited funding
+                    to projects that will have the greatest impact on safety. This data and all UDOT Safety
+                    Program information are protected under 23 USC 409 and therefore inadmissible in court.
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header text-white bg-dark">
+                    *Crash Severity (1 = no injury, 2 = possible injury, 3 = suspected minor injury, 4 = suspected serious injury, 5 = fatal)
+
                 </div>
                 <div class="card-body">
-                    <table id="datatablesSimple">
+                    <table id="datatablesSimple" class="caption-top">
+                        <caption>
+                            <a href="/Home/CreateCrashForm" class="btn btn-primary">+ Add Crash</a>
+                        </caption>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -52,112 +56,114 @@
                                 <th>Main Road</th>
                                 <th>City</th>
                                 <th>County</th>
-                                <th>Crash Severity</th>
-                                <th>Tags</th>
+                                <th>*Crash Severity</th>
+                                <th>Crash Conditions</th>
+                                <th>Actions</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (Crash c in Model.Crashes)
                             {
-                                <tr>
-                                    <td>@c.CRASH_ID</td>
-                                    <td>@c.Crash_Date.ToShortDateString(), @c.Crash_Time</td>
-                                    <td>@c.Route</td>
-                                    <td>@c.Milepoint</td>
-                                    <td>(@c.Lat_Utm_Y, @c.Long_Utm_X)</td>
-                                    <td>@c.Main_Road_Name</td>
-                                    <td>@c.City</td>
-                                    <td>@c.County_Name</td>
-                                    <td>@c.Crash_Severity_ID</td>
+                            <tr>
+                                <td>@c.CRASH_ID</td>
+                                <td>@c.Crash_Date.ToShortDateString(), @c.Crash_Time</td>
+                                <td>@c.Route</td>
+                                <td>@c.Milepoint</td>
+                                <td>(@c.Lat_Utm_Y, @c.Long_Utm_X)</td>
+                                <td>@c.Main_Road_Name</td>
+                                <td>@c.City</td>
+                                <td>@c.County_Name</td>
+                                <td>@c.Crash_Severity_ID</td>
 
-                                    <td>
-                                        @if (@c.Work_Zone_Related is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Work Zone Related</span>
-                                        }
-                                        @if (@c.Pedestrian_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Pedestrian Involved</span>
-                                        }
-                                        @if (@c.Bicyclist_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Bicyclist Involved</span>
-                                        }
-                                        @if (@c.Motorcycle_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Motorcycle Involved</span>
-                                        }
-                                        @if (@c.Improper_Restraint is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Improper Restraint</span>
-                                        }
-                                        @if (@c.Unrestrained is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Unrestrained</span>
-                                        }
-                                        @if (@c.DUI is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">DUI</span>
-                                        }
-                                        @if (@c.Intersection_Related is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Intersection Related</span>
-                                        }
-                                        @if (@c.Wild_Animal_Related is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Wild Animal Related</span>
-                                        }
-                                        @if (@c.Domestic_Animal_Related is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Domestic Animal Related</span>
-                                        }
-                                        @if (@c.Overturn_Rollover is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Overturn Rollover</span>
-                                        }
-                                        @if (@c.Commercial_Motor_VEH_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Commercial Motor Vehicle Involved</span>
-                                        }
-                                        @if (@c.Teenage_Driver_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Teenage Driver Involved</span>
-                                        }
-                                        @if (@c.Older_Driver_Involved is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Older Driver Involved</span>
-                                        }
-                                        @if (@c.Night_Dark_Condition is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Night/Dark Conditions</span>
-                                        }
-                                        @if (@c.Single_Vehicle is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Single Vehicle</span>
-                                        }
-                                        @if (@c.Distracted_Driver is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Distracted Driving</span>
-                                        }
-                                        @if (@c.Drowsy_Driver is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Drowsy Driving</span>
-                                        }
-                                        @if (@c.Roadway_Departure is true)
-                                        {
-                                            <span class="badge rounded-pill bg-primary text-light">Roadway Departure</span>
-                                        }
+                                <td>
+                                    @if (@c.Work_Zone_Related is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Work Zone Related</span>
+                                    }
+                                    @if (@c.Pedestrian_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Pedestrian Involved</span>
+                                    }
+                                    @if (@c.Bicyclist_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Bicyclist Involved</span>
+                                    }
+                                    @if (@c.Motorcycle_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Motorcycle Involved</span>
+                                    }
+                                    @if (@c.Improper_Restraint is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Improper Restraint</span>
+                                    }
+                                    @if (@c.Unrestrained is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Unrestrained</span>
+                                    }
+                                    @if (@c.DUI is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">DUI</span>
+                                    }
+                                    @if (@c.Intersection_Related is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Intersection Related</span>
+                                    }
+                                    @if (@c.Wild_Animal_Related is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Wild Animal Related</span>
+                                    }
+                                    @if (@c.Domestic_Animal_Related is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Domestic Animal Related</span>
+                                    }
+                                    @if (@c.Overturn_Rollover is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Overturn Rollover</span>
+                                    }
+                                    @if (@c.Commercial_Motor_VEH_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Commercial Vehicle Involved</span>
+                                    }
+                                    @if (@c.Teenage_Driver_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Teenage Driver Involved</span>
+                                    }
+                                    @if (@c.Older_Driver_Involved is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Older Driver Involved</span>
+                                    }
+                                    @if (@c.Night_Dark_Condition is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Night/Dark Conditions</span>
+                                    }
+                                    @if (@c.Single_Vehicle is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Single Vehicle</span>
+                                    }
+                                    @if (@c.Distracted_Driver is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Distracted Driving</span>
+                                    }
+                                    @if (@c.Drowsy_Driver is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Drowsy Driving</span>
+                                    }
+                                    @if (@c.Roadway_Departure is true)
+                                    {
+                                        <span class="badge rounded-pill bg-primary">Roadway Departure</span>
+                                    }
 
 
-                                    </td>
+                                </td>
 
-                                    <td>
-                                        <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/@c.CRASH_ID">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-danger btn-sm" href="/Home/DeleteConfirmation/@c.CRASH_ID">Delete</a>
-                                    </td>
-                                </tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-warning btn-sm" href="/Home/UpdateCrashForm/@c.CRASH_ID"><i class="bi bi-pencil-square" style="color:white"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@c.CRASH_ID"><i class="bi bi-trash3"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

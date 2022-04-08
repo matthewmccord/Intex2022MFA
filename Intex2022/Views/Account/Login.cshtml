@@ -2,45 +2,48 @@
     ViewData["Title"] = "Login";
 }
 
-
 @model Intex2022.Models.ViewModels.LoginModel
 
-<html>
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Admin Login</h3></div>
+                            <div class="card-body">
+                                <div class="text-danger" asp-validation-summary="All"></div>
+                                <form method="post" asp-controller="Account" asp-action="Login">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" asp-for="Username" type="text"/>
+                                        <label asp-for="Username">Username</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" asp-for="Password" type="password" placeholder="Password" />
+                                        <label asp-for="Password">Password</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                        <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <a class="small" href="password.html">Forgot Password?</a>
+                                        <button class="btn btn-primary" type="submit">Login</button>
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/lib2/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+                                        @*<a class="btn btn-primary" href="index.html">Login</a>*@
+                                    </div>
+                                    <input type="hidden" asp-for="ReturnUrl" />
+                                </form>
+                            </div>
 
-<body>
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-1-2">Administrator Login</span>
-    </div>
-
-    <div class="m-1 p-1">
-        <div class="text-danger" asp-validation-summary="All"></div>
-
-        <form method="post" asp-controller="Account" asp-action="Login">
-            <div class="form-group">
-                <label asp-for="Username">User Name:</label>
-                <input asp-for="Username" class="form-control" />
+                            <div class="card-footer text-center py-3">
+                                <div class="small"><a href="/Account/Registration">Need an account? Sign up!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Password">Password:</label>
-                <input asp-for="Password" class="form-control" type="password" />
-            </div>
-
-
-            <button class="btn btn-primary" type="submit">Log In</button>
-
-
-
-            <input type="hidden" asp-for="ReturnUrl" />
-        </form>
-
-        <br />
-        <a href="/Account/Registration" class="btn btn-success">Create User</a>
+        </main>
     </div>
-</body>
-</html>
+</div>

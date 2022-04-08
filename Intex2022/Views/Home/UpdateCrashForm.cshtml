@@ -57,17 +57,20 @@
         <input type="text" class="form-control" name="Main_Road_Name" value="@Model.Main_Road_Name">
     </div>
 
-    @*FINISH CITY DROPDOWN, get city and county to populate correctly*@
+    @*get city and county to populate correctly*@
     <div class="mb-2">
         <label name="City" class="form-label">City:</label>
-        <select id="City" name="City" class="form-control" value="@Model.City">
-            <option value="@Model.City">@Model.City</option>
+        <select id="City" name="City" class="form-control">
+            @foreach (string c in ViewBag.Crashes)
+            {
+                <option value="@c">@c</option>
+            }
         </select>
     </div>
 
     <div class="mb-2">
         <label name="County_Name" class="form-label">County:</label>
-        <select id="County_Name" name="County_Name" class="form-control" value="@Model.County_Name">
+        <select id="County_Name" name="County_Name" class="form-control">
             <option value="BEAVER">BEAVER</option>
             <option value="BOX ELDER">BOX ELDER</option>
             <option value="CACHE">CACHE</option>
@@ -203,11 +206,13 @@
 
 @section Scripts{
     <script defer>
-        function doSometing() {
-            document.getElementById('gender').value = "{{record.gender}}"
-            document.getElementById("state").value = "{{record.state}}"
+        function selectedDrop() {
+            document.getElementById('City').value = "@Model.City";
+            document.getElementById('County_Name').value = "@Model.County_Name";
         }
         doSometing();
 
     </script>
 }
+
+
