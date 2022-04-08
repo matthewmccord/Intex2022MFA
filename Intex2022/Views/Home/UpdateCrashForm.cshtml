@@ -9,199 +9,295 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
+@*UPDATE FORM*@
+<div class="row m-1 p-1">
+    <!-- Create form-->
+    <div class="col-12">
+        <div class="container-fluid px-4">
+            <div>
+                <a asp-area="" asp-controller="Home" asp-action="CrashDetailsList" class="btn btn-primary"><i class="bi bi-chevron-left"></i> Return to Crash Data </a>
+            </div>
 
-<h2>Update Vehicle Crash</h2>
-<h5>Update crash information below:</h5>
-<br />
-<form method="POST" action="/Home/UpdateCrash">
+            <!-- Form title -->
+            <div class="text-center mb-5">
+                <h1 class="mt-4">Update Vehicle Crash</h1>
+                <p class="lead fw-normal text-muted mb-0">Update crash information below:</p>
+            </div>
 
-    <input type="hidden" name="CRASH_ID" value="@Model.CRASH_ID" readonly />
+            <div class="row justify-content-center" style="margin-top: -20px;">
+                <div class="col-xl-8">
+                    <div class="text-danger" asp-validation-summary="All"></div>
 
-    <div class="mb-2">
-        <label for="Crash_Date-time" class="form-label">Select crash date:</label>
-        <br />
-        <input type="date" id="Expirydate" class="form-control" name="Crash_Date"
-               value="@(@Model == null ? null : @Model.Crash_Date.ToString("yyyy-MM-dd"))" />
-    </div>
-    <div class="mb-2">
-        <label for="Crash_Time" class="form-label">Select time of crash:</label>
-        <br />
-        <input type="time" id="Crash_Time" class="form-control"
-               name="Crash_Time" value="@Model.Crash_Time">
-    </div>
+                    <form method="POST" action="/Home/UpdateCrash">
 
-    <div class="mb-2">
-        <label name="Route" class="form-label">Route No:</label>
-        <input type="number" class="form-control" name="Route" min="0" value="@Model.Route">
-    </div>
-    <div class="mb-2">
-        <label name="Milepoint" class="form-label">Milepoint:</label>
-        <input type="number" class="form-control" name="Milepoint" value="@Model.Milepoint">
-    </div>
+                        <input type="hidden" name="CRASH_ID" value="@Model.CRASH_ID" readonly />
 
-    @*include max length*@
-    <div class="mb-2">
-        <label name="Lat_Utm_Y" class="form-label">Latitude:</label>
-        <input type="number" class="form-control" name="Lat_Utm_Y" value="@Model.Lat_Utm_Y">
-    </div>
+                        <div class="row">
+                            <div class="col">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="date" id="Crash_Date" class="form-control"
+                                                       name="Crash_Date" value="@(@Model == null ? null : @Model.Crash_Date.ToString("yyyy-MM-dd"))" required>
+                                                <label for="meeting-time" class="form-check-label">Select crash date:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="time" id="Crash_Time" class="form-control"
+                                                       name="Crash_Time" value="@Model.Crash_Time" required>
+                                                <label for="meeting-time" class="form-check-label">Select time of crash:</label>
+                                            </div>
+                                        </div>
 
-    @*include max length*@
-    <div class="mb-2">
-        <label name="Long_Utm_X" class="form-label">Longitude:</label>
-        <input type="number" class="form-control" name="Long_Utm_X" value="@Model.Long_Utm_X">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" name="Route" min="0" value="@Model.Route" required>
+                                                <label name="Route" class="form-check-label">Route No:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" name="Milepoint" value="@Model.Milepoint" >
+                                                <label name="Milepoint" class="form-check-label">Milepoint:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="Main_Road_Name" value="@Model.Main_Road_Name"required>
+                                                <label name="Main_Road_Name" class="form-check-label">Main Road:</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" name="Lat_Utm_Y" value="@Model.Lat_Utm_Y" required>
+                                                <label name="Lat_Utm_Y" class="form-check-label">Latitude:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="number" class="form-control" name="Long_Utm_X" value="@Model.Long_Utm_X" required>
+                                                <label name="Long_Utm_X" class="form-check-label">Longitude:</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <select id="City" name="City" class="form-select" value="@Model.City" required>
+                                                    @foreach (string c in ViewBag.Crashes)
+                                                    {
+                                                        <option value="@c">@c</option>
+                                                    }
+
+                                                </select>
+                                                <label name="City" class="form-check-label">City:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-3 ">
+                                                <select id="County_Name" name="County_Name" class="form-select"  value="@Model.County_Name" required>
+                                                    <option value="BEAVER">BEAVER</option>
+                                                    <option value="BOX ELDER">BOX ELDER</option>
+                                                    <option value="CACHE">CACHE</option>
+                                                    <option value="CARBON">CARBON</option>
+                                                    <option value="DAGGETT">DAGGETT</option>
+                                                    <option value="DAVIS">DAVIS</option>
+                                                    <option value="DUCHESNE">DUCHESNE</option>
+                                                    <option value="EMERY">EMERY</option>
+                                                    <option value="GARFIELD">GARFIELD</option>
+                                                    <option value="GRAND">GRAND</option>
+                                                    <option value="IRON">IRON</option>
+                                                    <option value="JUAB">JUAB</option>
+                                                    <option value="KANE">KANE</option>
+                                                    <option value="MILLARD">MILLARD</option>
+                                                    <option value="MORGAN">MORGAN</option>
+                                                    <option value="PIUTE">PIUTE</option>
+                                                    <option value="RICH">RICH</option>
+                                                    <option value="SALT LAKE">SALT LAKE</option>
+                                                    <option value="SAN JUAN">SAN JUAN</option>
+                                                    <option value="SANPETE">SANPETE</option>
+                                                    <option value="SEVIER">SEVIER</option>
+                                                    <option value="SUMMIT">SUMMIT</option>
+                                                    <option value="TOOELE">TOOELE</option>
+                                                    <option value="UINTAH">UINTAH</option>
+                                                    <option value="UTAH">UTAH</option>
+                                                    <option value="WASATCH">WASATCH</option>
+                                                    <option value="WASHINGTON">WASHINGTON</option>
+                                                    <option value="WAYNE">WAYNE</option>
+                                                    <option value="WEBER">WEBER</option>
+                                                </select>
+                                                <label name="County_Name" class="form-check-label">County:</label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<br />*@
+                        <hr />
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted mb-0 form-label">
+                                    Crash Severity Scale:
+                                    <br />
+                                    <ul>
+                                        <li class="text-muted">1 - no injury</li>
+                                        <li class="text-muted">2 - possible injury</li>
+                                        <li class="text-muted">3 - suspected minor injury</li>
+                                        <li class="text-muted">4 - suspected serious injury</li>
+                                        <li class="text-muted">5 - fatal</li>
+                                    </ul>
+                                </p>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <select id="Crash_Severity_ID" name="Crash_Severity_ID" class="form-select" value="@Model.Crash_Severity_ID">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <label name="Crash_Severity_ID" class="form-check-label">Crash Severity:</label>
+                                </div>
+                            </div>
+                        </div>
+                        @*<br />*@
+                        <hr />
+                        @*<br />*@
+
+                        <div class="row">
+                            <h6 class="text-muted">Check all boxes that apply to crash conditions:</h6>
+                            <br /><br />
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Work_Zone_Related" name="Work_Zone_Related" value="True" checked="@Model.Work_Zone_Related">
+                                    <label name="Work_Zone_Related" class="form-check-label">Work Zone Related</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Pedestrian_Involved" name="Pedestrian_Involved" value="True" checked="@Model.Pedestrian_Involved">
+                                    <label name="Pedestrian_Involved" class="form-check-label">Pedestrian Involved</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Bicyclist_Involved" name="Bicyclist_Involved" value="True" checked="@Model.Bicyclist_Involved">
+                                    <label name="Bicyclist_Involved" class="form-check-label">Bicyclist Involved</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Motorcycle_Involved" name="Motorcycle_Involved" value="True" checked="@Model.Motorcycle_Involved">
+                                    <label name="Motorcycle_Involved" class="form-check-label">Motorcycle Involved</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Improper_Restraint" name="Improper_Restraint" value="True" checked="@Model.Improper_Restraint">
+                                    <label name="Improper_Restraint" class="form-check-label">Improper Restraint</label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Unrestrained" name="Unrestrained" value="True" checked="@Model.Unrestrained">
+                                    <label name="Unrestrained" class="form-check-label">Unrestrained</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="DUI" name="DUI" value="True" checked="@Model.DUI">
+                                    <label name="DUI" class="form-check-label">DUI</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Intersection_Related" name="Intersection_Related" value="True" checked="@Model.Intersection_Related">
+                                    <label name="Intersection_Related" class="form-check-label">Intersection Related</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Wild_Animal_Related" name="Wild_Animal_Related" value="True" checked="@Model.Wild_Animal_Related">
+                                    <label name="Wild_Animal_Related" class="form-check-label">Wild Animal Related</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Domestic_Animal_Related" name="Domestic_Animal_Related" value="True" checked="@Model.Domestic_Animal_Related">
+                                    <label name="Domestic_Animal_Related" class="form-check-label">Domestic Animal Related</label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Overturn_Rollover" name="Overturn_Rollover" value="True" checked="@Model.Overturn_Rollover">
+                                    <label name="Overturn_Rollover" class="form-check-label">Overturn Rollover</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Commercial_Motor_VEH_Involved" name="Commercial_Motor_VEH_Involved" value="True" checked="@Model.Commercial_Motor_VEH_Involved">
+                                    <label name="Commercial_Motor_VEH_Involved" class="form-check-label">Commercial Motor Vehicle Involved</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Teenage_Driver_Involved" name="Teenage_Driver_Involved" value="True" checked="@Model.Teenage_Driver_Involved">
+                                    <label name="Teenage_Driver_Involved" class="form-check-label">Teenage Driver Involved</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Older_Driver_Involved" name="Older_Driver_Involved" value="True" checked="@Model.Older_Driver_Involved">
+                                    <label name="Older_Driver_Involved" class="form-check-label">Older Driver Involved</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Night_Dark_Condition" name="Night_Dark_Condition" value="True" checked="@Model.Night_Dark_Condition">
+                                    <label name="Night_Dark_Condition" class="form-check-label">Night/Dark Condition</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Single_Vehicle" name="Single_Vehicle" value="True" checked="@Model.Single_Vehicle">
+                                    <label name="Single_Vehicle" class="form-check-label">Single Vehicle</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="True" checked="@Model.Distracted_Driver">
+                                    <label name="Distracted_Driver" class="form-check-label">Distracted Driving</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="True" checked="@Model.Drowsy_Driver">
+                                    <label name="Drowsy_Driver" class="form-check-label">Drowsy Driving</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="Roadway_Departure" name="Roadway_Departure" value="True" checked="@Model.Roadway_Departure">
+                                    <label name="Roadway_Departure" class="form-check-label">Roadway Departure</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-1">
+                                <div class="fw-bolder">Form submission successful!</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mb-1">
+                            @*<a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="CrashDetailsList" style="margin: 20px">Cancel</a>*@
+                            <button class="btn btn-primary btn-lg" id="submitButton" type="submit" style="margin: 20px; width: 150px">Update</button>
+                            <p style="width: 50px;"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Back Button -->
+
     </div>
+</div>
 
 
-    <div class="mb-2">
-        <label name="Main_Road_Name" class="form-label">Main Road:</label>
-        <input type="text" class="form-control" name="Main_Road_Name" value="@Model.Main_Road_Name">
-    </div>
-
-    @*get city and county to populate correctly*@
-    <div class="mb-2">
-        <label name="City" class="form-label">City:</label>
-        <select id="City" name="City" class="form-control">
-            @foreach (string c in ViewBag.Crashes)
-            {
-                <option value="@c">@c</option>
-            }
-        </select>
-    </div>
-
-    <div class="mb-2">
-        <label name="County_Name" class="form-label">County:</label>
-        <select id="County_Name" name="County_Name" class="form-control">
-            <option value="BEAVER">BEAVER</option>
-            <option value="BOX ELDER">BOX ELDER</option>
-            <option value="CACHE">CACHE</option>
-            <option value="CARBON">CARBON</option>
-            <option value="DAGGETT">DAGGETT</option>
-            <option value="DAVIS">DAVIS</option>
-            <option value="DUCHESNE">DUCHESNE</option>
-            <option value="EMERY">EMERY</option>
-            <option value="GARFIELD">GARFIELD</option>
-            <option value="GRAND">GRAND</option>
-            <option value="IRON">IRON</option>
-            <option value="JUAB">JUAB</option>
-            <option value="KANE">KANE</option>
-            <option value="MILLARD">MILLARD</option>
-            <option value="MORGAN">MORGAN</option>
-            <option value="PIUTE">PIUTE</option>
-            <option value="RICH">RICH</option>
-            <option value="SALT LAKE">SALT LAKE</option>
-            <option value="SAN JUAN">SAN JUAN</option>
-            <option value="SANPETE">SANPETE</option>
-            <option value="SEVIER">SEVIER</option>
-            <option value="SUMMIT">SUMMIT</option>
-            <option value="TOOELE">TOOELE</option>
-            <option value="UINTAH">UINTAH</option>
-            <option value="UTAH">UTAH</option>
-            <option value="WASATCH">WASATCH</option>
-            <option value="WASHINGTON">WASHINGTON</option>
-            <option value="WAYNE">WAYNE</option>
-            <option value="WEBER">WEBER</option>
-        </select>
-    </div>
-
-    <br />
-
-    <div class="mb-2">
-        <label name="Crash_Severity_ID" class="form-label">Crash Severity (1=no injury, 2=possible injury, 3=suspected minor injury, 4=suspected serious injury, 5=fatal):</label>
-        <select id="Crash_Severity_ID" name="Crash_Severity_ID" class="form-control" value="@Model.Crash_Severity_ID">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-
-        </select>
-    </div>
-
-    <br /><hr /><br />
-
-    <h6>Check boxes that apply to crash.</h6>
-
-    <div class="mb-2">
-        <label name="Work_Zone_Related" class="form-label">Work Zone Related</label>
-        <input type="checkbox" id="Work_Zone_Related" name="Work_Zone_Related" value="True" checked="@Model.Work_Zone_Related">
-    </div>
-    <div class="mb-2">
-        <label name="Pedestrian_Involved" class="form-label">Pedestrian Involved</label>
-        <input type="checkbox" id="Pedestrian_Involved" name="Pedestrian_Involved" value="True" checked="@Model.Pedestrian_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Bicyclist_Involved" class="form-label">Bicyclist Involved</label>
-        <input type="checkbox" id="Bicyclist_Involved" name="Bicyclist_Involved" value="True" checked="@Model.Bicyclist_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Motorcycle_Involved" class="form-label">Motorcycle Involved</label>
-        <input type="checkbox" id="Motorcycle_Involved" name="Motorcycle_Involved" value="True" checked="@Model.Motorcycle_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Improper_Restraint" class="form-label">Improper Restraint</label>
-        <input type="checkbox" id="Improper_Restraint" name="Improper_Restraint" value="True" checked="@Model.Improper_Restraint">
-    </div>
-    <div class="mb-2">
-        <label name="Unrestrained" class="form-label">Unrestrained</label>
-        <input type="checkbox" id="Unrestrained" name="Unrestrained" value="True" checked="@Model.Unrestrained">
-    </div>
-    <div class="mb-2">
-        <label name="DUI" class="form-label">DUI</label>
-        <input type="checkbox" id="DUI" name="DUI" value="True" checked="@Model.DUI">
-    </div>
-    <div class="mb-2">
-        <label name="Intersection_Related" class="form-label">Intersection Related</label>
-        <input type="checkbox" id="Intersection_Related" name="Intersection_Related" value="True" checked="@Model.Intersection_Related">
-    </div>
-    <div class="mb-2">
-        <label name="Wild_Animal_Related" class="form-label">Wild Animal Related</label>
-        <input type="checkbox" id="Wild_Animal_Related" name="Wild_Animal_Related" value="True" checked="@Model.Wild_Animal_Related">
-    </div>
-    <div class="mb-2">
-        <label name="Domestic_Animal_Related" class="form-label">Domestic Animal Related</label>
-        <input type="checkbox" id="Domestic_Animal_Related" name="Domestic_Animal_Related" value="True" checked="@Model.Domestic_Animal_Related">
-    </div>
-    <div class="mb-2">
-        <label name="Overturn_Rollover" class="form-label">Overturn Rollover</label>
-        <input type="checkbox" id="Overturn_Rollover" name="Overturn_Rollover" value="True" checked="@Model.Overturn_Rollover">
-    </div>
-    <div class="mb-2">
-        <label name="Commercial_Motor_VEH_Involved" class="form-label">Commercial Motor Vehicle Involved</label>
-        <input type="checkbox" id="Commercial_Motor_VEH_Involved" name="Commercial_Motor_VEH_Involved" value="True" checked="@Model.Commercial_Motor_VEH_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Teenage_Driver_Involved" class="form-label">Teenage Driver Involved</label>
-        <input type="checkbox" id="Teenage_Driver_Involved" name="Teenage_Driver_Involved" value="True" checked="@Model.Teenage_Driver_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Older_Driver_Involved" class="form-label">Older Driver Involved</label>
-        <input type="checkbox" id="Older_Driver_Involved" name="Older_Driver_Involved" value="True" checked="@Model.Older_Driver_Involved">
-    </div>
-    <div class="mb-2">
-        <label name="Night_Dark_Condition" class="form-label">Night/Dark Condition</label>
-        <input type="checkbox" id="Night_Dark_Condition" name="Night_Dark_Condition" value="True" checked="@Model.Night_Dark_Condition">
-    </div>
-    <div class="mb-2">
-        <label name="Single_Vehicle" class="form-label">Single Vehicle</label>
-        <input type="checkbox" id="Single_Vehicle" name="Single_Vehicle" value="True" checked="@Model.Single_Vehicle">
-    </div>
-    <div class="mb-2">
-        <label name="Distracted_Driver" class="form-label">Distracted Driving</label>
-        <input type="checkbox" id="Distracted_Driver" name="Distracted_Driver" value="True" checked="@Model.Distracted_Driver">
-    </div>
-    <div class="mb-2">
-        <label name="Drowsy_Driver" class="form-label">Drowsy Driving</label>
-        <input type="checkbox" id="Drowsy_Driver" name="Drowsy_Driver" value="True" checked="@Model.Drowsy_Driver">
-    </div>
-    <div class="mb-2">
-        <label name="Roadway_Departure" class="form-label">Roadway Departure</label>
-        <input type="checkbox" id="Roadway_Departure" name="Roadway_Departure" value="True" checked="@Model.Roadway_Departure">
-    </div>
-
-    <div class="mb-2">
-        <button type="submit" class="btn btn-success">Submit</button>
-    </div>
-</form>
 
 
 @section Scripts{
