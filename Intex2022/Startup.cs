@@ -97,6 +97,17 @@ namespace Intex2022
                 app.UseHsts();
             }
 
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add(
+                    "Content-Security-Policy",
+                    "script-src 'self'; " +
+                    "style-src 'self'; " +
+                    "img-src 'self'");
+
+                await next();
+            });
             // Content Security Policy
             app.UseCsp(csp =>
             {
@@ -132,7 +143,7 @@ namespace Intex2022
 
                 // Allow fonts to be downloaded from:
                 csp.AllowFonts
-                    .FromSelf()
+                    .FromSelf();
 
                 // Allow object, embed, and applet sources from:
                 csp.AllowPlugins
