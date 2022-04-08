@@ -50,8 +50,6 @@
     <Folder Include="Components\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\County\" />
     <Folder Include="Views\Account\" />
