@@ -20,22 +20,16 @@
 
                                 <form method="post" asp-controller="Account" asp-action="Registration">
                                     <div class="row mb-3">
-
-                                        @*<div class="form-group">
-                                            <label asp-for="Username">User Name:</label>
-                                            <input asp-for="Username" class="form-control" />
-                                        </div>*@
-
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
-                                                <label for="inputFirstName">First name</label>
+                                                <input class="form-control" asp-for="Username" type="text" placeholder="Enter a username" />
+                                                <label asp-for="Username">Username</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
-                                                <label for="inputLastName">Last name</label>
+                                                <input class="form-control" asp-for="phoneNumber" type="text" placeholder="Enter your last name" />
+                                                <label asp-for="phoneNumber">Phone</label>
                                             </div>
                                         </div>
                                     </div>
@@ -44,36 +38,25 @@
                                         <label for="inputEmail">Email address</label>
                                     </div>
 
-                                    @*<div class="form-group">
-                                        <label asp-for="Password">Password:</label>
-                                        <input asp-for="Password" class="form-control" type="password" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label asp-for="ConfirmPassword">Confirm Password:</label>
-                                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
-                                    </div>*@
+                                    
 
 
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                <label for="inputPassword">Password</label>
+                                                <input class="form-control" asp-for="Password" type="password" placeholder="Create a password" />
+                                                <label asp-for="Password">Password</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-                                                <label for="inputPasswordConfirm">Confirm Password</label>
+                                                <input class="form-control" asp-for="Password" type="password" placeholder="Confirm password" />
+                                                <label asp-for="Password">Confirm Password</label>
                                             </div>
                                         </div>
                                     </div>
 
-                                    @*<div class="form-group">
-                                        <label asp-for="phoneNumber">Phone Number:</label>
-                                        <input asp-for="phoneNumber" class="form-control" />
-                                    </div>*@
+                                    
 
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create User</a></div>
