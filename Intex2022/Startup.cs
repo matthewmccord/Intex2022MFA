@@ -132,7 +132,7 @@ namespace Intex2022
 
                 // Allow fonts to be downloaded from:
                 csp.AllowFonts
-                    .FromSelf()
+                    .FromSelf();
 
                 // Allow object, embed, and applet sources from:
                 csp.AllowPlugins
