@@ -159,8 +159,15 @@ namespace Intex2022.Controllers
         IQueryable<Crash> Crashes => _context.Crashes;
 
 
-        //---------------- Delete -----------------//
-        [Authorize(Roles = "Administrator, test55")]
+        //---------------- Delete Confirmation / Deletion -----------------//
+        [Authorize]
+        [Route("/Home/DeleteConfirmation/{id}")]
+        public IActionResult DeleteConfirmation(int id)
+        {
+            Crash crash = _context.Crashes.FirstOrDefault(c => c.CRASH_ID == id);
+            return View("DeleteConfirmation", crash);
+        }
+        [Authorize(Roles= "Administrator, test55")]
         [Route("/Home/DeleteCrash/{id}")]
         public IActionResult DeleteCrash(int id)
         {
@@ -170,13 +177,14 @@ namespace Intex2022.Controllers
             return RedirectToAction("CrashDetailsList");
         }
 
-        //------------- Privacy Policy -----------//
-        public IActionResult PrivacyPolicy()
+        [HttpGet]
+        public IActionResult Calculator()
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Calculator()
+
+        //------------- Privacy Policy -----------//
+        public IActionResult PrivacyPolicy()
         {
             return View();
         }
