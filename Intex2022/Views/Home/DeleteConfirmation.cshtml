@@ -12,4 +12,7 @@
 <h2>Confirm Deletion</h2>
 <h3>Are you sure you want to delete the crash with Crash ID: @Model.CRASH_ID ?</h3>
 <a class="btn btn-danger btn-sm" href="/Home/DeleteCrash/@Model.CRASH_ID">Delete</a>
+<div>
+    <a asp-area="" asp-controller="Home" asp-action="CrashDetailsList" class="btn btn-primary"><i class="bi bi-chevron-left"></i> Return to Crash Data </a>
+</div>
 <input type="hidden" asp-for="CRASH_ID" />
