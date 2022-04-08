@@ -14,6 +14,7 @@ using Microsoft.ML.OnnxRuntime;
 using Intex2022.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Joonasw.AspNetCore.SecurityHeaders;
 
 namespace Intex2022
 {
@@ -36,7 +37,6 @@ namespace Intex2022
                 options.Preload = true;
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(60);
-                options.ExcludedHosts.Add("byugroup37.com");
             });
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -94,10 +94,68 @@ namespace Intex2022
             }
             else
             {
-                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
+            // Content Security Policy
+            app.UseCsp(csp =>
+            {
+                // If nothing is mentioned for a resource class, allow from this domain
+                csp.ByDefaultAllow
+                    .FromSelf();
+
+                // Allow JavaScript from:
+                csp.AllowScripts
+                    .FromSelf() //This domain
+                    .From("localhost:5001");
+
+                // CSS allowed from:
+                csp.AllowStyles
+                    .FromSelf();
+
+                csp.AllowImages
+                    .FromSelf();
+
+                // HTML5 audio and video elemented sources can be from:
+                csp.AllowAudioAndVideo
+                    .FromNowhere();
+
+                // Contained iframes can be sourced from:
+                csp.AllowFrames
+                    .FromNowhere(); //Nowhere, no iframes allowed
+
+                // Allow AJAX, WebSocket and EventSource connections to:
+                csp.AllowConnections
+                    .To("ws://localhost:5001")
+                    .To("http://localhost:5001")
+                    .ToSelf();
+
+                // Allow fonts to be downloaded from:
+                csp.AllowFonts
+                    .FromSelf()
+
+                // Allow object, embed, and applet sources from:
+                csp.AllowPlugins
+                    .FromNowhere();
+
+                // Allow other sites to put this in an iframe?
+                csp.AllowFraming
+                    .FromNowhere(); // Block framing on other sites, equivalent to X-Frame-Options: DENY
+
+                // Do not block violations, only report
+                // This is a good idea while testing your CSP
+                // Remove it when you know everything will work
+                csp.SetReportOnly();
+                // Where should the violation reports be sent to?
+                csp.ReportViolationsTo("/csp-report");
+
+                // Do not include the CSP header for requests to the /api endpoints
+                csp.OnSendingHeader = context =>
+                {
+                    context.ShouldNotSend = context.HttpContext.Request.Path.StartsWithSegments("/api");
+                    return Task.CompletedTask;
+                };
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
