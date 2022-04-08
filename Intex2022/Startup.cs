@@ -73,10 +73,13 @@ namespace Intex2022
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 
+            services.AddRazorPages();
+            
             services.AddSingleton<InferenceSession>(
                         new InferenceSession("wwwroot/best_reg_model.onnx")
                                                     );
@@ -120,6 +123,9 @@ namespace Intex2022
                     "County", "{countySelect}", new { Controller = "Home", action = "CrashDetailsList" });
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
+                endpoints.MapFallbackToPage("/account/manage", "/Identity/Pages/EnableAuthenticator");
             });
 
             //where we seeded the data but we deleted this bc the database is set up
