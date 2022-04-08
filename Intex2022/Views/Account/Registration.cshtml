@@ -7,49 +7,6 @@
 
 <h1>Registration Page</h1>
 
-<body>
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-1-2">Create a User</span>
-    </div>
-
-    <div class="m-1 p-1">
-        <div class="text-danger" asp-validation-summary="All"></div>
-
-        <form method="post" asp-controller="Account" asp-action="Registration">
-            <div class="form-group">
-                <label asp-for="Username">User Name:</label>
-                <input asp-for="Username" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password">Password:</label>
-                <input asp-for="Password" class="form-control" type="password" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ConfirmPassword">Confirm Password:</label>
-                <input asp-for="ConfirmPassword" class="form-control" type="password" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email">Email:</label>
-                <input asp-for="Email" class="form-control" type="email" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="phoneNumber">Phone Number:</label>
-                <input asp-for="phoneNumber" class="form-control" />
-            </div>
-            <br />
-
-            <button class="btn btn-primary" type="submit">Create User</button>
-
-
-
-            <input type="hidden" asp-for="ReturnUrl" />
-        </form>
-    </div>
-</body>
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
         <main>
@@ -59,8 +16,16 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                             <div class="card-body">
-                                <form>
+                                <div class="text-danger" asp-validation-summary="All"></div>
+
+                                <form method="post" asp-controller="Account" asp-action="Registration">
                                     <div class="row mb-3">
+
+                                        @*<div class="form-group">
+                                            <label asp-for="Username">User Name:</label>
+                                            <input asp-for="Username" class="form-control" />
+                                        </div>*@
+
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
                                                 <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
@@ -78,6 +43,18 @@
                                         <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
                                     </div>
+
+                                    @*<div class="form-group">
+                                        <label asp-for="Password">Password:</label>
+                                        <input asp-for="Password" class="form-control" type="password" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="ConfirmPassword">Confirm Password:</label>
+                                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                    </div>*@
+
+
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
@@ -92,8 +69,14 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @*<div class="form-group">
+                                        <label asp-for="phoneNumber">Phone Number:</label>
+                                        <input asp-for="phoneNumber" class="form-control" />
+                                    </div>*@
+
                                     <div class="mt-4 mb-0">
-                                        <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                                        <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create User</a></div>
                                     </div>
                                 </form>
                             </div>
